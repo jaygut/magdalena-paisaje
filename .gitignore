@@ -1,0 +1,9 @@
+# Generated releases and local QA stay outside version control.
+/dist/
+/recibos/
+__pycache__/
+*.py[cod]
+.DS_Store
+.venv/
+.env
+.env.*

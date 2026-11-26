@@ -1,17 +1,60 @@
-# Magdalena · Lectura pública preparada
+# Magdalena · Inteligencia de paisaje
 
-La entrada es index.html. El paquete es estático y usa rutas relativas. Incluye .nojekyll. Para comprobarlo localmente, sitúe el contenido bajo un directorio con el nombre del proyecto y sirva su directorio padre con un servidor HTTP estático.
+Experiencia pública de Graph of Life para examinar qué evidencia necesita una decisión en El Espinal, Nataima y El Banco.
 
-La portada y las siete fichas presentan resultados numéricos de El Espinal, Nataima y El Banco. Las fuentes, transformaciones y condiciones por capa están en creditos-capas.html. El índice datos/archivos.csv contiene los SHA-256 de los activos salvo el propio índice. datos/resultados.json contiene las cifras de las figuras y su alcance. Para el relieve y el color natural se incluyen datos Copernicus, sus avisos y los productos identificados en datos/terreno.json, datos/relieve-regional.json y datos/sentinel.json.
+- **Página pública:** https://jaygut.github.io/magdalena-paisaje/
+- **Entrada:** [index.html](index.html)
+- **Autoría:** Story by Jay Gutiérrez, Graph of Life
+- **Edición visual aprobada:** `e8b6904ec68796af2d8e398cc7be8606cd0bc3d6`, 26 de noviembre de 2026.
 
-En index.html#corredores, la edición incluye campos de corriente, arbolado y comparaciones espaciales recalculados con ESA WorldCover 2021 v200. Consulte abierta/atribucion.txt y los métodos del mapa. Los campos, los retiros y los extremos pertenecen a ese ensayo independiente. El estudio con MapBiomas 2024 se conserva mediante gráficos de resultados agregados y una tabla de cuatro intervenciones en index.html#circuito-2024. Los objetos cartográficos derivados de MapBiomas y sus adaptaciones quedan en la edición local mientras se precisa el aviso de la distribución colombiana de MapBiomas. Los conteos de Nataima son hechos agregados expresados en una figura original. La tabla de la publicación, sus ilustraciones y la localización de muestras quedan fuera de este paquete.
+Este repositorio contiene el sitio estático y sus herramientas de mantenimiento. El motor de Spillover Predictor, los cálculos originales y el sprint de tres territorios se mantienen en sus repositorios de origen. Los comandos siguientes validan y empaquetan los resultados publicados; no vuelven a calcularlos.
 
-La sección el_banco de datos/resultados.json y el gráfico municipal se comparten bajo CC BY-SA 4.0 como adaptaciones de las series de IDEAM. Los límites proceden del Departamento Administrativo Nacional de Estadística - DANE: www.dane.gov.co. Los avisos Copernicus se conservan junto con las condiciones de la licencia del modelo de elevación en creditos-capas.html.
+## Empezar localmente
 
-La aprobación editorial del titular y la activación de una página pública son actos posteriores a la preparación técnica.
+Se necesita Python 3.9 o posterior. La comprobación de sintaxis JavaScript usa Node.js. La experiencia no requiere instalar paquetes ni construir bundles.
 
-En index.html#agua se pueden recorrer 1.800 m del caño Inesica sobre el relieve y consultar dos pasadas de radar y una de Landsat. En index.html#nivel-del-rio se pueden comparar los errores de dos estimaciones municipales en cada fecha. La galería de datos y el gráfico conservan sus resultados principales al abrirse sin JavaScript. Los campos hidrológicos y las síntesis conservan CC BY-SA 4.0. Consulte banco/atribucion.txt para reutilizar cada capa.
+```bash
+python3 tools/site.py check
+python3 -m http.server 8841 --bind 127.0.0.1
+```
 
-Nataima se abre en index.html#nataima. El gráfico permite explorar Hilacha, Tommy Atkins y los grupos de artrópodos. El seguimiento de campo está en index.html#cosecha. La publicación contiene hechos agregados, una figura original y una fotografía ilustrativa de Florida bajo CC BY 4.0. Los créditos por insumo están en nataima/atribucion.txt. En index.html#bosque y #radios se pueden comparar los encuadres y la coincidencia de modelos de El Espinal. El inventario incluye cada archivo salvo el propio inventario.
+Abra http://127.0.0.1:8841/ en el navegador. Utilice HTTP para los módulos, el worker de MapLibre y la carga de archivos; abrir `index.html` mediante `file://` limita esas funciones.
 
-Edición de conversación institucional del 26 de noviembre de 2026. La portada abre en index.html. El cierre #decision propone cotizar un seguimiento completo de mango, desde floración hasta entrega, con responsables, recursos y acceso por acordar. audiencias/finagro.html identifica el canal institucional y las referencias consultadas. Las tres fichas revisadas y las transiciones conservan los resultados y las interacciones de la edición Nataima. Se sirve desde la raíz del proyecto o un subdirectorio de GitHub Pages; todos los activos son locales y las fuentes externas se abren sólo al seguir sus enlaces.
+## Validar y preparar una entrega
+
+```bash
+python3 tools/site.py check
+python3 -m unittest discover -s tests -v
+python3 tools/site.py package --out dist
+```
+
+El paquete se selecciona exclusivamente desde [datos/archivos.csv](datos/archivos.csv), más el propio inventario. `dist/site/` es la carpeta servible; `dist/` contiene también el ZIP y los recibos. La herramienta funciona desde una copia limpia del repositorio, sin depender de rutas personales, del historial Git o de los archivos de otro sprint. Consulte `python3 tools/site.py --help` para los demás comandos.
+
+La integración continua ejecuta las comprobaciones estáticas, los controles negativos y el empaquetado. La revisión de navegador y la validación de marca siguen siendo pasos de aceptación separados, descritos en [docs/MANTENIMIENTO.md](https://github.com/jaygut/magdalena-paisaje/blob/main/docs/MANTENIMIENTO.md).
+
+## Recorrer las escenas
+
+| Escena | Entrada | Qué conserva la edición |
+|---|---|---|
+| El Espinal | [Corredores](index.html#corredores) | Arbolado ESA WorldCover 2021, campos de corriente potencial, retiros y lectura por celda. |
+| El Espinal | [Sensibilidad](index.html#supuestos), [bosque](index.html#bosque), [radios](index.html#radios) | Comparaciones de costo, extensión del paisaje y escala de movimiento supuesta. |
+| Nataima | [Visitantes](index.html#nataima), [seguimiento](index.html#cosecha) | Conteos por variedad y propuesta de seguimiento hasta la entrega. |
+| El Banco | [Inesica](index.html#agua) | Recorrido de 1.800 m, dos pasadas de radar y una de Landsat, con sus celdas y clasificaciones. |
+| El Banco | [Nivel del río](index.html#nivel-del-rio) | Contraste municipal de nueve fechas y resultado negativo al incorporar el nivel previo. |
+| Mesa institucional | [Decisiones](index.html#decision) | Orden de financiación propuesto y siete fichas por audiencia. |
+
+El refinamiento visual aprobado mejora el encuadre de los paisajes, las etiquetas y los controles existentes. Conserva los textos, las fuentes, los resultados y la interpretación. [docs/EDICION_VISUAL.md](https://github.com/jaygut/magdalena-paisaje/blob/main/docs/EDICION_VISUAL.md) registra su alcance y los límites de la revisión.
+
+## Fuentes, derechos y límites
+
+[creditos-capas.html](creditos-capas.html) reúne las atribuciones, transformaciones y condiciones por capa. Los avisos específicos están en [abierta/atribucion.txt](abierta/atribucion.txt), [nataima/atribucion.txt](nataima/atribucion.txt) y [banco/atribucion.txt](banco/atribucion.txt). [datos/resultados.json](datos/resultados.json) conserva cifras y alcance. Los productos Copernicus se identifican en `datos/terreno.json`, `datos/relieve-regional.json` y `datos/sentinel.json`.
+
+Los campos espaciales públicos de corredores pertenecen al ensayo independiente con ESA WorldCover 2021 v200. El estudio MapBiomas 2024 se presenta mediante resultados agregados; sus objetos cartográficos locales permanecen fuera de este paquete mientras se precisa el aviso de distribución colombiana. Los conteos de Nataima son hechos agregados con una figura original. La fotografía de contexto procede de Florida y conserva CC BY 4.0; no representa una muestra localizada en Nataima.
+
+La sección `el_banco` de `datos/resultados.json` y el gráfico municipal se comparten bajo CC BY-SA 4.0 como adaptaciones de series IDEAM. Los límites proceden del DANE. Las condiciones de cada insumo y de las fuentes tipográficas se conservan en sus avisos. La presencia de datos abiertos no establece una licencia única para todo el código, diseño o contenido de Graph of Life.
+
+## Publicación y mantenimiento
+
+GitHub Pages está activo desde `main` y la raíz del repositorio. Por ello, los archivos de mantenimiento versionados también pueden ser accesibles en la URL pública; sólo contienen instrucciones y verificadores públicos. El ZIP entregable selecciona exclusivamente el manifiesto del sitio. Los borradores, contactos, capturas de trabajo y datos privados deben permanecer fuera del repositorio.
+
+Publicar o enviar a terceros requiere la autorización correspondiente. La guía de mantenimiento documenta la validación, la comprobación HTTP posterior y cómo iniciar otra iteración sin perder el estado aprobado.

@@ -1,0 +1,22 @@
+name: Validate static site
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Validate approved experience and local resources
+        run: python3 tools/site.py check --require-node
+      - name: Run validator negative controls
+        run: python3 -m unittest discover -s tests -v
+      - name: Verify deterministic static package
+        run: python3 tools/site.py package --out "$RUNNER_TEMP/magdalena" --require-node
