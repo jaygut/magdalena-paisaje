@@ -8,7 +8,7 @@ const N = 89;
 const cached = new Map();
 let meta, land, cover, photo, treesImg, sample, active, request=0, interval, visible=true, ready=false;
 let zoom=window.matchMedia("(max-width:740px)").matches;
-let probe=null, raster=null, lastView=null;
+let probe=null, raster=null, lastView=null, cameraFrame=0, backingCanvas=null, tweenSurface=null, tweenContours=null, tweenCase=null;
 const motion=window.matchMedia("(prefers-reduced-motion:reduce)");
 const canvas=$(".wc-canvas"), poster=$(".wc-poster");
 const token=getComputedStyle(document.documentElement);
@@ -16,7 +16,7 @@ const paint=name=>token.getPropertyValue("--gol-"+name).trim();
 const px=name=>parseFloat(token.getPropertyValue("--gol-"+name));
 const palette=Object.fromEntries(["abyss","slate","sand","paper","green","teal","amber","coral","muted"].map(k=>[k,paint(k)]));
 const textFace=token.getPropertyValue("--gol-mono").trim();
-const fontSize=parseFloat(token.getPropertyValue("--micro")) || px("s3");
+const fontSize=parseFloat(token.getPropertyValue("--caption")) || px("s3");
 const cut=$("[data-play]"), selected=name=>scene.querySelector('input[name="wc-'+name+'"]:checked').value;
 const states=()=>({pair:selected("par"),removed:selected("retiro"),phase:selected("fase"),trees:$("[data-trees]").checked});
 const required=(v,msg)=>{if (!v) throw new Error(msg);}; const validArray=(a,n)=>Array.isArray(a)&&a.length===n;
@@ -43,13 +43,22 @@ function point(x,y){
   return [p.center[0]+p.scale*(c*dx+s*dy), p.center[1]+p.scale*p.foreshorten*(-s*dx+c*dy)-(z-p.datumM)*p.elevationPixelsPerMeter];
 }
 function ids(){return [...meta.pairs[active.pair].terminals,active.removed];}
+// Camera fitting operates in the existing projected image plane; no geographic coordinate changes.
+function screenLayout(w,h){
+  const rect=canvas.getBoundingClientRect(),gap=px("s2"),side=w<600?px("s4"):px("s6");
+  const boxes=Array.from(scene.querySelectorAll('.wc-rotulo,.wc-zoom,[data-phasebar]')).filter(el=>!el.hidden).map(el=>{
+    const r=el.getBoundingClientRect();return [r.left-rect.left-gap,r.top-rect.top-gap,r.width+2*gap,r.height+2*gap];
+  }).filter(box=>box[2]>2*gap&&box[3]>2*gap);
+  let top=px("s4"),bottom=h-px("s6");
+  for(const [x,y,bw,bh] of boxes){if(y+bh/2<h/2)top=Math.max(top,y+bh+gap);else bottom=Math.min(bottom,y-gap);}
+  return {left:side,right:w-side,top,bottom,boxes};
+}
 function makeCamera(w,h){
   const pt=zoom ? ids().flatMap(id=>[point(...meta.patches[id].xy),...meta.patches[id].rings.flatMap(r=>r.map(v=>point(...v)))]) : [point(0,0),point(0,N),point(N,0),point(N,N)];
   const xs=pt.map(p=>p[0]),ys=pt.map(p=>p[1]),left=Math.min(...xs),right=Math.max(...xs),top=Math.min(...ys),bottom=Math.max(...ys);
-  const sx=(w-(w<600?px("s6"):px("s8")*2))/Math.max(right-left,zoom?176:0);
-  const sy=(h-px("s7")*2)/Math.max(bottom-top,zoom?118:0);
+  const area=screenLayout(w,h),sx=(area.right-area.left)/Math.max(right-left,zoom?176:0),sy=(area.bottom-area.top)/Math.max(bottom-top,zoom?118:0);
   const z=Math.min(zoom?2.8:1.85,sx,sy), cx=(left+right)/2,cy=(top+bottom)/2;
-  return {z,dx:w/2-z*cx,dy:h/2-z*cy,xy(p){return [p[0]*z+this.dx,p[1]*z+this.dy];}};
+  return {z,dx:(area.left+area.right)/2-z*cx,dy:(area.top+area.bottom)/2-z*cy,xy(p){return [p[0]*this.z+this.dx,p[1]*this.z+this.dy];}};
 }
 function cellPath(ctx,k,pts){const j=k+Math.floor(k/N);ctx.beginPath();ctx.moveTo(...pts[j]);ctx.lineTo(...pts[j+1]);ctx.lineTo(...pts[j+N+2]);ctx.lineTo(...pts[j+N+1]);ctx.closePath();}
 function outline(ctx,ring){ctx.moveTo(...point(...ring[0]));for(const v of ring.slice(1))ctx.lineTo(...point(...v));ctx.closePath();}
@@ -81,10 +90,8 @@ function isolines(ctx,grid,max,z){
   }
   ctx.globalAlpha=1;ctx.setLineDash([]);
 }
-function drawBacking(w,h,dpr){
-  const c=stage(Math.round(w*dpr),Math.round(h*dpr)),ctx=c.getContext("2d"),v=makeCamera(w,h);
-  ctx.scale(dpr,dpr);ctx.fillStyle=palette.abyss;ctx.fillRect(0,0,w,h);
-  ctx.save();ctx.translate(v.dx,v.dy);ctx.scale(v.z,v.z);ctx.drawImage(photo,0,0);
+function drawSurface(ctx){
+  ctx.drawImage(photo,0,0);
   if(active.trees){
     ctx.save();
     if(active.phase==="after"){
@@ -95,7 +102,38 @@ function drawBacking(w,h,dpr){
     ctx.globalAlpha=active.phase==="change"?.53:.70;ctx.drawImage(treesImg,0,0);ctx.restore();
   }
   const values=active.field;
-  drawFields(ctx,values);isolines(ctx,values,active.phase==="change"?meta.scale.deltaMax:meta.scale.ampP99,v.z);
+  drawFields(ctx,values);
+}
+// Source-plane caches exist only while the existing zoom button is moving the camera.
+// The settled frame always uses the direct original-resolution drawing path.
+function cacheTweenSurface(dpr){
+  const c=stage(Math.round(photo.naturalWidth*dpr),Math.round(photo.naturalHeight*dpr)),ctx=c.getContext("2d");
+  ctx.scale(dpr,dpr);drawSurface(ctx);return c;
+}
+function cacheTweenContours(){
+  const paths=[];let path;
+  const recorder={lineWidth:1,globalAlpha:1,strokeStyle:palette.sand,dash:[],
+    beginPath(){path=new Path2D();},moveTo(x,y){path.moveTo(x,y);},lineTo(x,y){path.lineTo(x,y);},
+    setLineDash(values){this.dash=[...values];},
+    stroke(){paths.push({path,lineWidth:this.lineWidth,globalAlpha:this.globalAlpha,strokeStyle:this.strokeStyle,dash:[...this.dash]});}
+  };
+  isolines(recorder,active.field,active.phase==="change"?meta.scale.deltaMax:meta.scale.ampP99,1);
+  return paths;
+}
+function drawContours(ctx,z){
+  if(!tweenContours){isolines(ctx,active.field,active.phase==="change"?meta.scale.deltaMax:meta.scale.ampP99,z);return;}
+  ctx.save();
+  for(const item of tweenContours){ctx.lineWidth=item.lineWidth/z;ctx.globalAlpha=item.globalAlpha;ctx.strokeStyle=item.strokeStyle;ctx.setLineDash(item.dash.map(value=>value/z));ctx.stroke(item.path);}
+  ctx.restore();
+}
+function drawBacking(w,h,dpr,view){
+  if(tweenSurface&&tweenCase!==active)cancelCamera();
+  if(!backingCanvas||backingCanvas.width!==Math.round(w*dpr)||backingCanvas.height!==Math.round(h*dpr))backingCanvas=stage(Math.round(w*dpr),Math.round(h*dpr));
+  const c=backingCanvas,ctx=c.getContext("2d"),v=view||makeCamera(w,h);
+  ctx.setTransform(dpr,0,0,dpr,0,0);ctx.globalAlpha=1;ctx.setLineDash([]);ctx.fillStyle=palette.abyss;ctx.fillRect(0,0,w,h);
+  ctx.save();ctx.translate(v.dx,v.dy);ctx.scale(v.z,v.z);
+  if(tweenSurface)ctx.drawImage(tweenSurface,0,0,photo.naturalWidth,photo.naturalHeight);else drawSurface(ctx);
+  drawContours(ctx,v.z);
   ctx.strokeStyle=palette.muted;ctx.lineWidth=1/v.z;ctx.setLineDash([3/v.z,5/v.z]);ctx.beginPath();outline(ctx,[[0,0],[N,0],[N,N],[0,N]]);ctx.stroke();ctx.setLineDash([]);
   const labels=[],chosen=ids();
   for(const id of chosen){
@@ -106,15 +144,18 @@ function drawBacking(w,h,dpr){
   }
   ctx.restore();
   ctx.font='500 '+fontSize+'px '+textFace;
-  const occupied=[];
+  const layout=screenLayout(w,h),occupied=[...layout.boxes,[0,h-px("s6"),px("s8")*2,px("s6")],[w-px("s7"),h-px("s7"),px("s7"),px("s7")]];
   for(const [id,p,isCut] of labels){
-    const text=isCut?'Arboleda '+id:id.toUpperCase(),pad=px("s1"),tw=ctx.measureText(text).width+2*pad,th=fontSize+2*pad;
-    const dxs=[12,-tw-12,12,-tw-12,6,6],dys=[-th-8,-th-8,10,10,-th*2-12,th+16];
-    const opts=dxs.map((dx,i)=>[Math.max(pad,Math.min(w-tw-pad,p[0]+dx)),Math.max(px("s6"),Math.min(h-th-px("s4"),p[1]+dys[i]))]);
-    const box=opts.find(([x,y])=>!occupied.some(([lx,ly,lw,lh])=>x<lx+lw+pad&&x+tw+pad>lx&&y<ly+lh+pad&&y+th+pad>ly))||opts[0];
-    const [x,y]=box;occupied.push([x,y,tw,th]);
-    ctx.strokeStyle=isCut?palette.coral:palette.sand;ctx.lineWidth=1.25;ctx.beginPath();ctx.moveTo(...p);ctx.lineTo(x+tw/2,y+th/2);ctx.stroke();
-    ctx.fillStyle=palette.abyss;ctx.fillRect(x,y,tw,th);ctx.fillStyle=isCut?palette.coral:palette.sand;ctx.fillText(text,x+pad,y+fontSize+pad-1);
+    const text=isCut?'Arboleda '+id:id.toUpperCase(),pad=px("s2"),tw=ctx.measureText(text).width+2*pad,th=fontSize+2*pad,gap=px("s3");
+    const offsets=[[gap,-th-gap],[-tw-gap,-th-gap],[gap,gap],[-tw-gap,gap],[-tw/2,-th-gap],[-tw/2,gap],[gap,-th/2],[-tw-gap,-th/2]];
+    const opts=offsets.map(([dx,dy])=>[Math.max(pad,Math.min(w-tw-pad,p[0]+dx)),Math.max(pad,Math.min(h-th-pad,p[1]+dy))]);
+    const overlap=([x,y])=>occupied.reduce((sum,[lx,ly,lw,lh])=>sum+Math.max(0,Math.min(x+tw+pad,lx+lw)-Math.max(x-pad,lx))*Math.max(0,Math.min(y+th+pad,ly+lh)-Math.max(y-pad,ly)),0);
+    opts.sort((a,b)=>overlap(a)-overlap(b));
+    const [x,y]=opts[0];occupied.push([x,y,tw,th]);
+    const anchor=[Math.max(x,Math.min(x+tw,p[0])),Math.max(y,Math.min(y+th,p[1]))];
+    ctx.strokeStyle=isCut?palette.coral:palette.sand;ctx.lineWidth=1.25;ctx.beginPath();ctx.moveTo(...p);ctx.lineTo(...anchor);ctx.stroke();
+    ctx.fillStyle=palette.abyss;ctx.fillRect(x,y,tw,th);ctx.strokeStyle=isCut?palette.coral:palette.muted;ctx.lineWidth=1;ctx.strokeRect(x,y,tw,th);
+    ctx.fillStyle=isCut?palette.coral:palette.sand;ctx.fillText(text,x+pad,y+fontSize+pad-1);
     ctx.beginPath();ctx.arc(...p,3.5,0,Math.PI*2);ctx.fill();ctx.strokeStyle=palette.abyss;ctx.stroke();
   }
   // Project a real 0.5 km east-west segment, with its foreshortening shown on the map.
@@ -124,13 +165,33 @@ function drawBacking(w,h,dpr){
   ctx.beginPath();ctx.moveTo(ox,oy);ctx.lineTo(ox+nx/norm*19,oy+ny/norm*19);ctx.stroke();ctx.fillText('N',ox+nx/norm*19-3,oy+ny/norm*19-4);
   return {c,v};
 }
-function draw(force=false){
+function draw(force=false,view){
   if(!ready||!active)return;
   const w=canvas.clientWidth,h=canvas.clientHeight;if(!w||!h)return;
   const dpr=Math.min(window.devicePixelRatio||1,2);
-  if(force||!raster||raster.width!==Math.round(w*dpr)||raster.height!==Math.round(h*dpr)){const out=drawBacking(w,h,dpr);raster=out.c;lastView=out.v;canvas.width=raster.width;canvas.height=raster.height;}
+  if(force||!raster||raster.width!==Math.round(w*dpr)||raster.height!==Math.round(h*dpr)){const out=drawBacking(w,h,dpr,view);raster=out.c;lastView=out.v;if(canvas.width!==raster.width||canvas.height!==raster.height){canvas.width=raster.width;canvas.height=raster.height;}}
   const ctx=canvas.getContext("2d");ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(raster,0,0);
   if(probe!==null){ctx.save();ctx.scale(dpr,dpr);const [x,y]=lastView.xy(sample.centers[probe]);ctx.strokeStyle=palette.paper;ctx.beginPath();ctx.arc(x,y,8,0,Math.PI*2);ctx.moveTo(x-13,y);ctx.lineTo(x-4,y);ctx.moveTo(x+4,y);ctx.lineTo(x+13,y);ctx.moveTo(x,y-13);ctx.lineTo(x,y-4);ctx.moveTo(x,y+4);ctx.lineTo(x,y+13);ctx.stroke();ctx.restore();}
+}
+// The existing zoom button changes only the viewport. Reduced motion resolves immediately.
+function cancelCamera(){cancelAnimationFrame(cameraFrame);cameraFrame=0;tweenSurface=null;tweenContours=null;tweenCase=null;}
+function zoomCamera(){
+  if(!ready)return;
+  cancelCamera();const startView=lastView,frameCase=active,w=canvas.clientWidth,h=canvas.clientHeight;
+  zoom=!zoom;readout();const endView=makeCamera(w,h);
+  if(motion.matches||!startView){draw(true);return;}
+  tweenCase=active;tweenSurface=cacheTweenSurface(Math.min(window.devicePixelRatio||1,2));
+  if(typeof Path2D!=="undefined")tweenContours=cacheTweenContours();
+  const start=performance.now(),duration=420;
+  function frame(now){
+    if(!ready||active!==frameCase||canvas.clientWidth!==w||canvas.clientHeight!==h){cancelCamera();return;}
+    const progress=Math.min(1,(now-start)/duration),t=progress*progress*(3-2*progress);
+    if(progress===1){cancelCamera();draw(true);return;}
+    const view={...endView,z:startView.z+(endView.z-startView.z)*t,dx:startView.dx+(endView.dx-startView.dx)*t,dy:startView.dy+(endView.dy-startView.dy)*t};
+    draw(true,view);
+    cameraFrame=requestAnimationFrame(frame);
+  }
+  cameraFrame=requestAnimationFrame(frame);
 }
 function adjustedCover(k){
   const x=k%N+.5,y=Math.floor(k/N)+.5;let inside=false;
@@ -193,10 +254,10 @@ async function choose(){
   }catch(err){if(my===request){missing(); $("[data-panel]").hidden=!meta;}}
 }
 scene.addEventListener("change",e=>{if(e.target.matches('input')){if(e.isTrusted)stop();probe=null;choose();}});
-$("[data-zoom]").addEventListener("click",()=>{if(!ready)return;zoom=!zoom;readout();draw(true);});
+$("[data-zoom]").addEventListener("click",zoomCamera);
 $("[data-retry]").addEventListener("click",()=>{cached.clear();meta=null;choose();});
 cut.addEventListener("click",()=>{if(interval){stop();return;}if(!ready)return;const next=()=>{if(!visible){stop();return;}const phase=selected("fase")==="before"?"after":"before";scene.querySelector('[name=wc-fase][value="'+phase+'"]').checked=true;choose();};next();if(!motion.matches){cut.setAttribute("aria-pressed","true");cut.textContent="Pausar comparación";interval=setInterval(next,2000);}});
-motion.addEventListener("change",stop);document.addEventListener("visibilitychange",()=>{if(document.hidden)stop();});
+motion.addEventListener("change",()=>{stop();cancelCamera();draw(true);});document.addEventListener("visibilitychange",()=>{if(document.hidden){stop();cancelCamera();draw(true);}});
 new IntersectionObserver(es=>{visible=es[0].isIntersecting;if(!visible)stop();},{rootMargin:"80px"}).observe(scene);
 canvas.addEventListener("pointerup",e=>{if(!ready||!lastView)return;const b=canvas.getBoundingClientRect(),x=e.clientX-b.left,y=e.clientY-b.top;let distance=Infinity,which=0;
   for(let i=0;i<sample.centers.length;i++){const [cx,cy]=lastView.xy(sample.centers[i]),d=(x-cx)**2+(y-cy)**2;if(d<distance){distance=d;which=i;}}
@@ -211,5 +272,5 @@ $("[data-export]").addEventListener("click",()=>{
   val.arbolado_clasificado_fraccion_2021 = cover.treeFraction[probe];
   val.significado_de_la_corriente = active.phase === "change" ? "Corriente después del retiro menos corriente inicial, en amperios del modelo." : "Intensidad local simulada con inyección de un amperio.";
   const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(val,null,2)],{type:"application/json"}));a.download="espinal-punto-"+(row+1)+"-"+(col+1)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);});
-let resize;new ResizeObserver(()=>{cancelAnimationFrame(resize);resize=requestAnimationFrame(()=>draw(true));}).observe($(".wc-mapa"));
+let resize;new ResizeObserver(()=>{cancelAnimationFrame(resize);resize=requestAnimationFrame(()=>{cancelCamera();draw(true);});}).observe($(".wc-mapa"));
 if(canvas.getContext("2d"))choose();

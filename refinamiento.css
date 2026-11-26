@@ -1,0 +1,134 @@
+/* Graph of Life brand v1.0.0 · tokens.json · generated Codex 2026-11-26
+   Presentation only. Preserve the existing section arc, images and scientific encodings.
+   Layout lengths derive from the canonical spacing/type tokens; viewport ratios are framing.
+*/
+
+/* Give the existing terrain room to carry the opening without a full-screen veil. */
+.reunion-portada .terreno::after { opacity:var(--faint); }
+.rn-relato { gap:var(--gol-s5); }
+.rn-invitacion p { max-width:40ch; }
+.rn-lugares { padding-block:var(--gol-s4); }
+.rn-lugares a { padding-block:var(--gol-s2); }
+.rn-lugares a:focus-visible { outline-offset:0; }
+
+/* Keep the map surface continuous; reserve its edges for the existing instruments. */
+.wc-mapa,.bh-map {
+  height:clamp(calc(var(--gol-s8)*5),72svh,calc(var(--gol-s8)*8));
+}
+.wc-rotulo,.bh-position { border-left:var(--strong-rule) solid var(--gol-connection); }
+.wc-rotulo,.wc-zoom,.bh-position { top:var(--gol-s4); }
+.wc-mapa fieldset.wc-etapas,.bh-travel {
+  top:auto; bottom:var(--gol-s3); left:50%; transform:translateX(-50%);
+}
+.wc-mapa fieldset.wc-etapas { max-width:calc(100% - var(--gol-s5)); }
+.wc-mapa .wc-etapas .wc-opts span { min-width:calc(var(--gol-s8) + var(--gol-s2)); }
+.wc-zoom,.bh-travel button { min-height:var(--gol-s6); }
+.wc-zoom { padding-inline:var(--gol-s4); }
+.wc-leyenda { gap:var(--gol-s3) var(--gol-s5); padding-block:var(--gol-s4); }
+.wc-colores,.bh-legend { font-size:var(--caption); }
+.wc-clave,.bh-legend span { gap:var(--gol-s2); }
+.wc-clave i,.bh-legend i { width:var(--micro); height:var(--micro); flex-shrink:0; }
+.wc-panel,.bh-console { padding-block:var(--gol-s5); }
+.wc-resultado,.bh-result { padding-left:var(--gol-s4); }
+.bh-strip { padding-block:var(--gol-s3); gap:var(--gol-s3); }
+.bh-choices span { column-gap:var(--gol-s1); }
+.bh-legend { padding-block:var(--gol-s3); gap:var(--gol-s2) var(--gol-s4); }
+.bh-stops { gap:var(--gol-s3); }
+.bh-stops button { min-height:var(--gol-s6); padding-inline:var(--gol-s3); }
+.bh-ruler { height:var(--gol-s5); margin-block:var(--gol-s2); }
+
+/* One control vocabulary; active state, hover and keyboard focus stay distinct. */
+.wc-opts span,.bh-choices span,.na-tabs span,.eb-modos span,
+.criterio-opciones span,.ot-opciones span {
+  min-height:var(--gol-s6); display:flex; align-items:center; justify-content:center;
+}
+.wc-opts label:hover span,.bh-choices label:hover span,.na-tabs label:hover span,
+.eb-modos label:hover span,.criterio-opciones label:hover span,.ot-opciones label:hover span {
+  border-color:var(--gol-sand);
+}
+.wc-zoom:hover,.bh-travel button:hover,.bh-stops button:hover { border-color:var(--gol-paper); }
+.na-clave button { min-height:var(--gol-s6); padding-inline:var(--gol-s2); }
+.na-clave button[aria-pressed=true] { background:var(--gol-navy); border-color:var(--gol-signal); }
+.na-clave button:hover { border-color:var(--gol-sand); }
+input:focus-visible + span { position:relative; z-index:2; }
+summary { padding-block:var(--gol-s2); }
+
+/* Let the same photograph and specimen inventory breathe, without spatial effects. */
+.na-mesa { grid-template-columns:minmax(0,.58fr) minmax(0,1fr); }
+.na-laboratorio { padding:var(--gol-s5) var(--na-margen) var(--gol-s4) var(--gol-s5); }
+.na-barra { gap:var(--gol-s3); padding-bottom:var(--gol-s4); }
+.na-lamina { height:clamp(calc(var(--gol-s8)*4),44svh,calc(var(--gol-s8)*5)); }
+.na-clave { padding-top:var(--gol-s3); }
+.na-clave>div { gap:var(--gol-s1) var(--gol-s3); }
+.na-foto p { left:var(--gol-s4); bottom:var(--gol-s4); max-width:calc(100% - var(--gol-s6)); }
+.na-pie { padding-block:var(--gol-s5); }
+
+/* Give the regional context and existing flat comparisons a consistent visual cadence. */
+.ot-horizonte { height:calc(var(--gol-s8)*3); }
+.ot-horizonte img { object-fit:cover; }
+.ot-grafica { min-width:0; }
+.ot-figura,.criterio-figura { border-top-color:var(--gol-muted); }
+.eb-dia { min-height:var(--gol-s6); }
+.eb-dia,.eb-eje { border-left:var(--strong-rule) solid transparent; }
+.eb-dia[aria-pressed=true] { border-left:var(--strong-rule) solid var(--gol-connection); }
+.rn-transicion { padding-block:var(--gol-s6); }
+.rn-transicion a { padding-block:var(--gol-s2); text-underline-offset:var(--gol-s2); }
+
+@media (prefers-reduced-motion:no-preference) {
+  a,button,input+span,summary { transition:color 160ms ease,border-color 160ms ease,background-color 160ms ease; }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { scroll-behavior:auto!important; animation:none!important; transition:none!important; }
+}
+
+@media (max-width:1100px) {
+  .na-laboratorio { padding-inline:var(--gol-s4); }
+  .na-barra { align-items:start; }
+  .na-clave>div { gap:0 var(--gol-s2); }
+}
+@media (max-width:740px) {
+  .reunion-portada { grid-template-rows:min(48svh,calc(var(--gol-s8)*4)) auto auto; }
+  .rn-encabezado h1 { max-width:15ch; }
+  .rn-lugares { padding-block:var(--gol-s3); }
+  .wc-intro,.na-intro,.bh-intro { gap:var(--gol-s3); padding-block:var(--gol-s5) var(--gol-s4); }
+  .wc-intro h2,.na-intro h2,.bh-intro h2 { font-size:calc(var(--heading-small) + var(--gol-s2)); }
+  .wc-mapa,.bh-map { height:clamp(calc(var(--gol-s8)*4),60svh,calc(var(--gol-s8)*6)); }
+  .bh-map { height:clamp(calc(var(--gol-s8)*4),48svh,calc(var(--gol-s8)*5)); }
+  .wc-rotulo,.wc-zoom,.bh-position { top:var(--gol-s3); }
+  .wc-rotulo { left:var(--gol-s2); max-width:calc(100% - var(--gol-s8) - var(--gol-s4)); padding:var(--gol-s2); }
+  .wc-zoom { right:var(--gol-s2); min-height:var(--gol-s6); padding-inline:var(--gol-s2); }
+  .wc-mapa fieldset.wc-etapas,.bh-travel { top:auto; bottom:var(--gol-s6); left:50%; transform:translateX(-50%); }
+  .wc-mapa .wc-etapas .wc-opts span { min-width:calc(var(--gol-s7) + var(--gol-s2)); padding-inline:var(--gol-s3); }
+  .wc-leyenda,.bh-console { padding-block:var(--gol-s4); }
+  .wc-panel { padding-block:var(--gol-s4); }
+  .bh-strip { gap:var(--gol-s2); }
+  .bh-choices { width:100%; }
+  .bh-choices label { flex:1; }
+  .bh-choices span { flex-wrap:wrap; column-gap:var(--gol-s1); }
+  .bh-stamp { margin:0; line-height:var(--flow-leading); }
+  .bh-position { left:var(--gol-s3); }
+  .bh-travel button { padding-inline:var(--gol-s3); }
+  .bh-legend { column-gap:var(--gol-s3); }
+  .na-mesa { grid-template-columns:minmax(0,1fr); }
+  .na-foto { height:clamp(calc(var(--gol-s8)*2),35svh,calc(var(--gol-s8)*4)); }
+  .na-foto img { object-position:60% 53%; }
+  .na-foto p { left:var(--gol-s3); bottom:var(--gol-s3); max-width:calc(100% - var(--gol-s5)); }
+  .na-laboratorio { padding:var(--gol-s4) var(--na-margen); }
+  .na-lamina { height:calc(var(--gol-s8)*3); }
+  .na-barra { gap:var(--gol-s3); padding-bottom:var(--gol-s3); }
+  .na-clave>div { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:var(--gol-s1) var(--gol-s2); }
+  .na-clave button { justify-content:flex-start; text-align:left; }
+  .na-pie { padding-block:var(--gol-s4); }
+  .ot-horizonte { height:calc(var(--gol-s8)*2); }
+  .rn-transicion { padding-block:var(--gol-s5); }
+  .eb-modos label { flex:1; }
+  .eb-modos span { height:100%; text-align:center; }
+}
+@media (max-width:359px) {
+  .barra nav { gap:var(--gol-s1); }
+  .barra nav a { font-size:var(--micro); }
+  .wc-rotulo { font-size:var(--micro); max-width:calc(100% - var(--gol-s8) - var(--gol-s5)); }
+  .wc-mapa .wc-etapas .wc-opts span { min-width:var(--gol-s7); padding-inline:var(--gol-s2); }
+  .na-tabs span { padding-inline:var(--gol-s2); }
+  .bh-choices span { font-size:var(--micro); }
+}

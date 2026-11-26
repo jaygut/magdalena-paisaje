@@ -8,7 +8,7 @@ const palette=getComputedStyle(document.documentElement);
 const token=s=>palette.getPropertyValue("--gol-"+s).trim(), size=s=>parseFloat(token(s));
 const colors=["abyss","slate","muted","teal","green","paper","sand","amber"].reduce((o,k)=>(o[k]=token(k),o),{});
 const ink=[colors.abyss,colors.muted,colors.green,colors.amber,colors.teal];
-const textFace=token("mono"),font=parseFloat(palette.getPropertyValue("--micro"));
+const textFace=token("mono"),font=parseFloat(palette.getPropertyValue("--caption"));
 const output=v=>new Intl.NumberFormat("es-CO",{maximumFractionDigits:0,minimumGroupingDigits:1,useGrouping:"always"}).format(v);
 const files=name=>new URL("datos/"+name,import.meta.url).href;
 const expected=["radar10","landsat12","radar22"], keys=fieldKey.slice(1), cache=new Map();
@@ -89,18 +89,36 @@ function buildPlate(){
  return p;
 }
 function bounds(pts){const xs=pts.map(p=>p[0]),ys=pts.map(p=>p[1]);return [Math.min(...xs),Math.min(...ys),Math.max(...xs),Math.max(...ys)];}
+// Reserve the real control rectangles while fitting the unchanged projected terrain.
+function screenLayout(w,h){
+ const rect=canvas.getBoundingClientRect(),gap=size("s2"),side=w<520?size("s4"):size("s6");
+ const boxes=Array.from(scene.querySelectorAll('.bh-position,.bh-travel')).filter(el=>!el.hidden).map(el=>{
+  const r=el.getBoundingClientRect();return [r.left-rect.left-gap,r.top-rect.top-gap,r.width+2*gap,r.height+2*gap];
+ }).filter(box=>box[2]>2*gap&&box[3]>2*gap);
+ let top=size("s4"),bottom=h-size("s6");
+ for(const [x,y,bw,bh] of boxes){if(y+bh/2<h/2)top=Math.max(top,y+bh+gap);else bottom=Math.min(bottom,y-gap);}
+ return {left:side,right:w-side,top,bottom,boxes};
+}
 function camera(m,w,h){
+ const area=screenLayout(w,h),focusX=(area.left+area.right)/2,focusY=(area.top+area.bottom)/2;
  if(m===null){
   const [l,t,r,b]=bounds(mask.map(k=>centers[k]));
-  return {cx:(l+r)/2,cy:(t+b)/2,z:Math.min((w-2*(w<520?size("s3"):size("s6")))/(r-l+48),(h-size("s7")*1.52)/(b-t+40))};
+  const z=Math.min((area.right-area.left)/(r-l+size("s6")),(area.bottom-area.top)/(b-t+size("s5")+size("s2")));
+  return {cx:(l+r)/2-(focusX-w/2)/z,cy:(t+b)/2-(focusY-h/2)/z,z};
  }
- const [x,y]=project(...locationAt(m));return {cx:x,cy:y,z:Math.min((w-size("s4"))/(w<520?490:725),(h-size("s4"))/(w<520?275:355))};
+ const [x,y]=project(...locationAt(m)),z=Math.min((w-size("s4"))/(w<520?490:725),(area.bottom-area.top)/(w<520?275:355));
+ return {cx:x-(focusX-w/2)/z,cy:y-(focusY-h/2)/z,z};
 }
 function cssPt(p,c,w,h){return [(p[0]-c.cx)*c.z+w/2,(p[1]-c.cy)*c.z+h/2];}
-function textTag(ctx,xy,text,w,h,ang=1){
- const gap=size("s1"),tw=ctx.measureText(text).width+2*gap,th=font+2*gap;
- const x=Math.max(gap,Math.min(w-tw-gap,xy[0]+ang*9-(ang<0?tw:0))),y=Math.max(size("s6"),Math.min(h-th-size("s4"),xy[1]-th-5));
- ctx.strokeStyle=colors.sand;ctx.lineWidth=1;line(ctx,[xy,[x+tw/2,y+th/2]]);ctx.stroke();ctx.fillStyle=colors.abyss;ctx.fillRect(x,y,tw,th);ctx.fillStyle=colors.paper;ctx.fillText(text,x+gap,y+font+gap-1);
+function textTag(ctx,xy,text,w,h,ang=1,occupied=[]){
+ const gap=size("s2"),offset=size("s3"),tw=ctx.measureText(text).width+2*gap,th=font+2*gap;
+ const first=ang<0?-tw-offset:offset,second=ang<0?offset:-tw-offset;
+ const offsets=[[first,-th-offset],[second,-th-offset],[first,offset],[second,offset],[-tw/2,-th-offset],[-tw/2,offset]];
+ const opts=offsets.map(([dx,dy])=>[Math.max(gap,Math.min(w-tw-gap,xy[0]+dx)),Math.max(gap,Math.min(h-th-gap,xy[1]+dy))]);
+ const overlap=([x,y])=>occupied.reduce((sum,[lx,ly,lw,lh])=>sum+Math.max(0,Math.min(x+tw+gap,lx+lw)-Math.max(x-gap,lx))*Math.max(0,Math.min(y+th+gap,ly+lh)-Math.max(y-gap,ly)),0);
+ opts.sort((a,b)=>overlap(a)-overlap(b));const [x,y]=opts[0];occupied.push([x,y,tw,th]);
+ const anchor=[Math.max(x,Math.min(x+tw,xy[0])),Math.max(y,Math.min(y+th,xy[1]))];
+ ctx.strokeStyle=colors.sand;ctx.lineWidth=1;line(ctx,[xy,anchor]);ctx.stroke();ctx.fillStyle=colors.abyss;ctx.fillRect(x,y,tw,th);ctx.strokeStyle=colors.muted;ctx.strokeRect(x,y,tw,th);ctx.fillStyle=colors.paper;ctx.fillText(text,x+gap,y+font+gap-1);
 }
 function marker(ctx,x,y,r,fill){ctx.beginPath();ctx.arc(x,y,r,0,Math.PI*2);ctx.fillStyle=fill;ctx.fill();ctx.strokeStyle=colors.abyss;ctx.lineWidth=1;ctx.stroke();}
 function draw(override){
@@ -112,13 +130,14 @@ function draw(override){
  const selected=catalog.sections.find(s=>s.chainageM===Math.round(distance??-1));
  if(selected){ctx.strokeStyle=colors.paper;ctx.lineWidth=1.2/c.z;ctx.globalAlpha=.8;for(const k of selected.cells){poly(ctx,k);ctx.stroke();}}
  ctx.restore();ctx.font='500 '+font+'px '+textFace;
+ const occupied=[...screenLayout(w,h).boxes,[0,h-size("s6"),size("s8")*2,size("s6")],[w-size("s7"),h-size("s7"),size("s7"),size("s7")]];
  if(distance===null){
-  const ends=[cssPt(geometry[0],c,w,h),cssPt(geometry.at(-1),c,w,h)];textTag(ctx,ends[0],w<520?"Sur":"Extremo sur",w,h,-1);textTag(ctx,ends[1],w<520?"Norte":"Extremo norte",w,h);
+  const ends=[cssPt(geometry[0],c,w,h),cssPt(geometry.at(-1),c,w,h)];textTag(ctx,ends[0],w<520?"Sur":"Extremo sur",w,h,-1,occupied);textTag(ctx,ends[1],w<520?"Norte":"Extremo norte",w,h,1,occupied);
   for(const ep of ends)marker(ctx,...ep,3,colors.paper);
  }
  for(const s of catalog.sections){const pos=cssPt(project(...s.xy),c,w,h);if(pos[0]<0||pos[0]>w||pos[1]<0||pos[1]>h)continue;marker(ctx,...pos,selected?.id===s.id?5:2.8,colors.sand);}
  if(distance!==null){
-  const p=cssPt(project(...locationAt(distance)),c,w,h);ctx.strokeStyle=colors.paper;ctx.lineWidth=2;ctx.beginPath();ctx.arc(...p,10,0,Math.PI*2);ctx.stroke();marker(ctx,...p,3,colors.paper);textTag(ctx,p,output(distance)+" m",w,h);
+  const p=cssPt(project(...locationAt(distance)),c,w,h);ctx.strokeStyle=colors.paper;ctx.lineWidth=2;ctx.beginPath();ctx.arc(...p,10,0,Math.PI*2);ctx.stroke();marker(ctx,...p,3,colors.paper);textTag(ctx,p,output(distance)+" m",w,h,1,occupied);
  }
  if(reading!==null){const p=cssPt(centers[reading],c,w,h);ctx.strokeStyle=colors.paper;ctx.lineWidth=2;ctx.beginPath();ctx.arc(...p,7,0,Math.PI*2);ctx.stroke();}
  const theta=terrain.projection.bearing,origin=project(19.5,38),east=project(19.5+Math.cos(theta)*100/30,38+Math.sin(theta)*100/30),north=project(19.5,36);

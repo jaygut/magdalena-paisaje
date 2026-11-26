@@ -46,13 +46,25 @@ async function showTerrain() {
   const source = {type:"image",url:file("media/sentinel-espinal.webp"),coordinates:[[w,n],[e,n],[e,s],[w,s]]};
   const bounds = region.relieve;
   const relief = {type:"image",url:file("media/copernicus-cc.webp"),coordinates:[[bounds[0],bounds[3]],[bounds[2],bounds[3]],[bounds[2],bounds[1]],[bounds[0],bounds[1]]]};
-  const map = new library.Map({container:host,center:[-74.902,4.175],zoom:innerWidth<740?11.7:12.1,pitch:52,bearing:-21,
-    padding:{left:innerWidth<740?0:Math.round(innerWidth*.40),right:0,top:0,bottom:0},renderWorldCopies:false,interactive:false,attributionControl:false,fadeDuration:0,
+  // Presentation-only camera. Reserve the existing narrative column without scaling the DEM.
+  const framing = () => {
+    const mobile=window.matchMedia('(max-width:740px)').matches;
+    const narrative=document.querySelector('.rn-relato').getBoundingClientRect();
+    return {center:[-74.902,4.175],zoom:mobile?11.65:12.3,pitch:mobile?54:58,bearing:-21,
+      padding:{left:mobile?0:Math.round(narrative.right),right:0,top:0,bottom:0}};
+  };
+  const map = new library.Map({container:host,...framing(),
+    renderWorldCopies:false,interactive:false,attributionControl:false,fadeDuration:0,
     style:{version:8,sources:{dsm:dem,sombra:{...dem},satelite:source,regional:relief},terrain:{source:"dsm",exaggeration:1},layers:[
       {id:"fondo",type:"background",paint:{"background-color":color("abyss")}},
       {id:"region",type:"raster",source:"regional",paint:{"raster-fade-duration":0}},
       {id:"relieve",type:"hillshade",source:"sombra",paint:{"hillshade-shadow-color":color("abyss"),"hillshade-highlight-color":color("slate"),"hillshade-accent-color":color("navy"),"hillshade-exaggeration":.55}},
-      {id:"color-natural",type:"raster",source:"satelite",paint:{"raster-opacity":.55,"raster-fade-duration":0}}]}});
+      {id:"color-natural",type:"raster",source:"satelite",paint:{"raster-opacity":1,"raster-fade-duration":0}}]}});
+  let resizeFrame;
+  new ResizeObserver(()=>{
+    cancelAnimationFrame(resizeFrame);
+    resizeFrame=requestAnimationFrame(()=>{map.resize();map.jumpTo(framing());});
+  }).observe(host);
   let failed=false;
   const fallback=()=>{failed=true;host.hidden=true;document.querySelector("#leyenda-terreno").textContent="Tolima · Relieve regional Copernicus GLO-90";};
   map.on("error",fallback);
