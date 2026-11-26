@@ -1,0 +1,31 @@
+EL ESPINAL · FUENTES DE LA COBERTURA ARBÓREA Y DEL MODELO
+Documentación de la edición local y de sus descargas
+
+Crédito de la capa cartográfica
+© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium
+
+Fuente y licencia
+ESA WorldCover 10 m 2021 v200, producido por el consorcio de ESA WorldCover a partir de Sentinel-1 y Sentinel-2. Publicado el 28 de octubre de 2022. Creative Commons Atribución 4.0 Internacional (CC BY 4.0). Esta licencia admite uso comercial, copia, distribución y adaptación. Conservar atribución, fuente, enlace de licencia, avisos de cambios y avisos del material de origen. El producto se ofrece según la exención de garantías de la sección 5. No se debe sugerir un aval del proveedor ni añadir restricciones al ejercicio de los derechos concedidos por la licencia.
+
+Producto: https://doi.org/10.5281/zenodo.7254221
+Datos y atribución del consorcio: https://esa-worldcover.org/en/data-access
+Licencia: https://creativecommons.org/licenses/by/4.0/
+Texto legal: https://creativecommons.org/licenses/by/4.0/legalcode.es
+Registro administrado por VITO en AWS: https://registry.opendata.aws/esa-worldcover-vito/
+Tesela: https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N03W075_Map.tif
+Manual v2, tabla 3: https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PUM_V2.0.pdf
+Validación v2: https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/docs/WorldCover_PVR_V2.0.pdf
+
+Referencia del conjunto de datos
+Zanaga, D., Van De Kerchove, R., Daems, D., De Keersmaecker, W., Brockmann, C., Kirches, G., Wevers, J., Cartus, O., Santoro, M., Fritz, S., Lesiv, M., Herold, M., Tsendbazar, N.E., Xu, P., Ramoino, F. y Arino, O. (2022). ESA WorldCover 10 m 2021 v200. DOI 10.5281/zenodo.7254221.
+
+Cambios realizados por Graph of Life
+Se recortó la banda temática Map para una ventana de 8.010 m de lado en El Espinal. Se reproyectó la clasificación categórica a UTM zona 18N mediante vecino más cercano. Cada celda de 90 m reúne 81 muestras de 10 m. La fracción arbórea expresa cuántas muestras recibieron el código 10 en WorldCover. El análisis aplica un segundo umbral, de al menos la mitad de las muestras, para delimitar componentes de tres o más celdas unidas por sus lados. Las terminales se eligen entre componentes que quedan dentro de la ventana. El circuito usa toda la ventana con frontera cerrada.
+
+La reclasificación, los contornos, las resistencias de escenario, los campos de corriente calculados y sus visualizaciones fueron elaborados por Graph of Life. La definición de WorldCover incluye tanto coberturas arbóreas naturales como plantaciones, con una cobertura mínima de árboles del 10 % en la clase 10. La fracción de muestras de clase 10 y la densidad física de copas son magnitudes distintas. Identificar bosque natural, tránsito de fauna o un corredor funcional exige evidencia adicional.
+
+Otras capas y años
+La imagen de orientación reproduce el color natural del producto Sentinel-2B L2A S2B_18NWK_20240123_0_L2A del 23 de enero de 2024, distribuido como COG por Earth Search/Element 84. Graph of Life recortó y reproyectó el compuesto TCI. Contains modified Copernicus Sentinel data (2024). La imagen ayuda a situar el paisaje y conserva una fecha distinta de la clasificación de 2021. Los avisos de GLO-30 y GLO-90 para las vistas de relieve se encuentran en los créditos generales de la misma edición.
+Condiciones Copernicus Sentinel: https://dataspace.copernicus.eu/terms-and-conditions
+
+Cada fuente y la obra propia de Graph of Life conservan sus respectivos derechos. Conservar este aviso junto a las copias de la capa y los archivos descargables. Los enlaces identifican el origen incluso cuando la copia se consulta sin conexión.

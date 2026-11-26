@@ -1,0 +1,115 @@
+/* Graph of Life brand v1.0.0 · tokens.json · IBM Plex Sans / IBM Plex Mono */
+.ot-escena {
+  position: relative;
+  padding: var(--gol-s8) var(--margen);
+  border-top: var(--rule) solid var(--gol-muted);
+  background: var(--gol-abyss);
+  color: var(--gol-mist);
+}
+.ot-escena > * { max-width: calc(var(--gol-measure) * 2); margin-inline: auto; }
+.ot-encabezado { margin-bottom: var(--gol-s5); }
+.ot-encabezado h2 { margin-bottom: var(--gol-s3); }
+.ot-encabezado p:last-child { max-width: var(--gol-measure); }
+.ot-encabezado p { margin-block: 0 var(--gol-s2); }
+.ot-encabezado:has(.ot-horizonte) {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0,.85fr);
+  align-items: end;
+  gap: var(--gol-s5);
+}
+.ot-horizonte {
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+  height: calc(var(--gol-s8)*2);
+}
+.ot-horizonte img { width: 100%; height: 100%; object-fit: cover; object-position: center 59%; }
+.ot-horizonte figcaption {
+  position: absolute;
+  bottom: 0; right: 0;
+  padding: var(--gol-s1) var(--gol-s2);
+  background: var(--gol-abyss);
+  color: var(--gol-sand);
+  font: 400 var(--micro)/var(--headline-leading) var(--gol-mono);
+}
+.ot-figura { margin-block: 0; border-top: var(--rule) solid var(--gol-muted); }
+.ot-figura > figcaption {
+  padding-block: var(--gol-s3);
+  font: 500 var(--heading-small)/var(--headline-leading) var(--gol-sans);
+  color: var(--gol-bone);
+}
+.ot-figura > figcaption small,.ot-figura .ot-pie,.ot-base {
+  font: 400 var(--caption)/var(--flow-leading) var(--gol-mono);
+  color: var(--gol-sand);
+}
+.ot-figura > figcaption small { margin-top: var(--gol-s1); }
+.ot-doble {
+  display: grid;
+  grid-template-columns: minmax(0,1.5fr) minmax(0,1fr);
+  align-items: center;
+  gap: var(--gol-s6);
+  padding-block: 0 var(--gol-s5);
+}
+.ot-grafica { min-width: 0; }
+.ot-grafica svg { display: block; width: 100%; height: auto; overflow: visible; }
+.ot-grafica svg text { fill: var(--gol-sand); font: 500 var(--copy-size)/1 var(--gol-mono); }
+.ot-pendiente .ot-guia { stroke: var(--gol-slate); stroke-width: var(--rule); }
+.ot-pendiente .ot-eje { font-size: var(--caption); }
+.ot-col line { stroke: var(--gol-muted); stroke-dasharray: 2 4; }
+.ot-col text { fill: var(--gol-muted); }
+.ot-bosque[data-ventana="original"] [data-marco-col="original"] text,
+.ot-bosque[data-ventana="ampliado"] [data-marco-col="ampliado"] text { fill: var(--gol-bone); }
+.ot-bosque[data-ventana="original"] [data-marco-col="original"] line,
+.ot-bosque[data-ventana="ampliado"] [data-marco-col="ampliado"] line { stroke: var(--gol-paper); }
+.ot-pendiente [data-ot-bosque="82"] { color: var(--gol-green); }
+.ot-pendiente [data-ot-bosque="65"] { color: var(--gol-teal); }
+.ot-pendiente [data-ot-bosque] text { fill: currentColor; }
+.ot-senda { fill: none; stroke: currentColor; stroke-width: var(--strong-rule); }
+.ot-pendiente [data-ot-punto] { fill: var(--gol-abyss); stroke: currentColor; stroke-width: var(--strong-rule); }
+.ot-bosque[data-ventana="original"] [data-ot-punto="original"],
+.ot-bosque[data-ventana="ampliado"] [data-ot-punto="ampliado"] { fill: currentColor; }
+.ot-margen { min-width: 0; }
+.ot-opciones { gap: 0; border-bottom: var(--rule) solid var(--gol-slate); margin: 0 0 var(--gol-s3); }
+.ot-opciones legend { padding-bottom: var(--gol-s2); }
+.ot-opciones label { display: inline-flex; align-items: center; padding: var(--gol-s1) 0; margin-inline-end: var(--gol-s3); }
+.ot-opciones input { margin: 0 var(--gol-s1) 0 0; }
+.ot-opciones span { padding: var(--gol-s1) 0; font-size: var(--caption); color: var(--gol-sand); border-bottom: var(--strong-rule) solid transparent; }
+.ot-opciones label:has(:checked) span { border-color: var(--gol-signal); color: var(--gol-bone); }
+.ot-grande { margin: 0; font: 500 clamp(var(--head-size),6vw,var(--title-size))/var(--display-leading) var(--gol-mono); letter-spacing: var(--display-track); color: var(--gol-green); }
+.ot-grande small { display: block; margin-top: var(--gol-s1); font: 400 var(--copy-size)/var(--flow-leading) var(--gol-mono); color: var(--gol-mist); letter-spacing: 0; }
+.ot-margen p:last-child { margin-bottom: 0; }
+.ot-base { margin: var(--gol-s2) 0; }
+.ot-franja { display: flex; gap: 0; width: 100%; height: var(--gol-s2); margin: var(--gol-s2) 0 var(--gol-s3); }
+.ot-franja span { min-width: 0; flex-basis: 0; }
+.ot-comunes { fill: var(--gol-green); background: var(--gol-green); }
+.ot-solo450 { fill: var(--gol-amber); background: var(--gol-amber); }
+.ot-solo810 { fill: var(--gol-teal); background: var(--gol-teal); }
+.ot-resto { fill: var(--gol-slate); background: var(--gol-slate); }
+.ot-radios .ot-num-svg,.ot-radios .ot-num-uni,.ot-radios .ot-sub-svg { fill: var(--gol-abyss); font-weight: 600; }
+.ot-radios .ot-num-svg { font-size: var(--head-size); }
+.ot-radios .ot-num-uni { font-size: var(--heading-small); }
+.ot-radios .ot-cab-svg { fill: var(--gol-mist); font-size: var(--heading-small); }
+.ot-omni[data-referencia="corto"] .ot-radios .ot-solo810,
+.ot-omni[data-referencia="largo"] .ot-radios .ot-solo450 { opacity: var(--veil); }
+.ot-grafica .ot-pie { max-width: var(--gol-measure); margin: 0; }
+.ot-figura details { max-width: var(--gol-measure); }
+.ot-figura details table { width: 100%; }
+.ot-figura details caption { text-align: left; color: var(--gol-bone); }
+.ot-decision { border-block: var(--rule) solid var(--gol-slate); padding-block: var(--gol-s3); }
+.ot-decision h3 { font: 500 var(--heading-small)/var(--headline-leading) var(--gol-sans); margin-bottom: var(--gol-s2); }
+.ot-decision p { margin-block: var(--gol-s2); }
+@media (max-width: 750px) {
+  .ot-escena { padding: var(--gol-s6) var(--margen); }
+  .ot-encabezado:has(.ot-horizonte),.ot-doble { grid-template-columns: minmax(0,1fr); gap: var(--gol-s3); }
+  .ot-horizonte { height: calc(var(--gol-s8) + var(--gol-s5)); }
+  .ot-encabezado { margin-bottom: var(--gol-s4); }
+  .ot-grande { font-size: var(--display-min); }
+  .ot-figura > figcaption { font-size: var(--heading-small); }
+  .ot-figura details table { font-size: var(--caption); }
+}
+@media (max-width: 470px) {
+  .ot-grafica svg text { font-size: calc(var(--copy-size) + var(--gol-s1)); }
+  .ot-pendiente .ot-eje { font-size: calc(var(--copy-size) + var(--gol-s1)); }
+  .ot-radios .ot-num-svg { font-size: var(--head-size); }
+  .ot-radios .ot-num-uni,.ot-radios .ot-cab-svg { font-size: var(--heading-small); }
+}

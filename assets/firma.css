@@ -1,0 +1,34 @@
+/* Graph of Life brand v1.0.0 · tokens.json · IBM Plex Mono, provenance 12 px, divider opacity. */
+:root { --firma-alto: var(--gol-s4); scroll-padding-block-end: calc(var(--firma-alto) + var(--gol-s2)); }
+.firma-pie {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 35;
+  inset: auto 0 0;
+  min-height: var(--firma-alto);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--gol-s2);
+  padding: var(--gol-s1) var(--gol-s3) max(var(--gol-s1), env(safe-area-inset-bottom));
+  background: var(--gol-abyss);
+  color: var(--gol-paper);
+  font: 400 var(--micro)/1.25 var(--gol-mono);
+  text-align: end;
+}
+.firma-pie .firma-autor { opacity: var(--veil); pointer-events: none; }
+.firma-pie a { color: var(--gol-sand); font: inherit; text-underline-offset: var(--gol-s1); }
+.firma-pie a:focus-visible { outline: var(--strong-rule) solid var(--gol-signal); }
+body:has(.firma-pie)::after { content: ""; display: block; height: calc(var(--firma-alto) + env(safe-area-inset-bottom)); }
+body:has(.firma-pie) #franja-estado { bottom: calc(var(--firma-alto) + env(safe-area-inset-bottom)); }
+@media (min-width: 741px) { body:has(.firma-pie) .inm-escenario { bottom: calc(var(--firma-alto) + env(safe-area-inset-bottom)); } }
+@media screen and (max-width: 359px) {
+  .firma-pie { padding-inline: var(--gol-s1); gap: var(--gol-s1); }
+}
+@media screen and (max-width: 309px) {
+  :root { --firma-alto: calc(var(--gol-s5) + var(--gol-s2)); }
+}
+@media print {
+  .firma-pie { position: static; background: none; color: var(--gol-navy); justify-content: end; min-height: 0; padding: 0; }
+  .firma-pie a, body:has(.firma-pie)::after { display: none; }
+}

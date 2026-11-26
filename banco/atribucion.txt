@@ -1,0 +1,52 @@
+EL BANCO · CRÉDITOS DE LA ESCENA Y SUS DESCARGAS
+Revisión de las fuentes y condiciones el 26 de noviembre de 2026
+
+Caño Inesica · línea cartográfica, banda de análisis y puntos de campo
+Instituto Geográfico Agustín Codazzi (IGAC). Cartografía Básica de Colombia a escala 1:100.000, Drenajes Sencillos, objeto 253543, Caño Inesica. Distribución consultada a través de IDEAM/DHIME. Fuente recuperada el 23 y verificada el 26 de noviembre de 2026. CC BY 4.0. El servicio documenta la escala y el autor. La fecha del levantamiento de este objeto queda sin especificar.
+Graph of Life reproyectó la geometría a UTM zona 18N, delimitó un tramo de 1.800 m de la línea y construyó una franja con 300 m de radio a sus lados y extremos. El ancho representa la búsqueda de observaciones satelitales. En el terreno, las orillas, el eje navegable, el paso de peces y la posición de las entradas de agua requieren verificación. El crédito de la geometría acompaña también los puntos, recortes o archivos geolocalizados derivados. El objeto IGAC de referencia a escala 1:500.000 sirvió para corroborar el nombre.
+Servicio oficial: https://dhime.ideam.gov.co/server/rest/services/Cartografia_Basica/Hidrografia/MapServer
+Capa: https://dhime.ideam.gov.co/server/rest/services/Cartografia_Basica/Hidrografia/MapServer/0
+Cartografía abierta del IGAC: https://www.igac.gov.co/datos-abiertos/datos-abiertos-geoespaciales
+Resolución 616 de 2020, arts. 2 y 7: https://www.igac.gov.co/transparencia-y-acceso-a-la-informacion-publica/normograma/resolucion-616-de-2020
+Licencia: https://creativecommons.org/licenses/by/4.0/
+
+Agua observada por radar · 10 y 22 de marzo de 2025
+OPERA (2024), NASA Jet Propulsion Laboratory. OPERA Dynamic Surface Water Extent from Sentinel-1, versión 1.0, distribuido por NASA Physical Oceanography Distributed Active Archive Center (PO.DAAC). Dos observaciones de la tesela T18PXR, banda WTR. La ficha del proyecto NASA SNWG/OPERA en el Registro de Datos Abiertos de AWS incluye este producto y declara CC BY 4.0. Conservar autoría, DOI, licencia e indicación de cambios junto con los avisos de Sentinel. Contains modified Copernicus Sentinel data (2025). Graph of Life conservó la referencia temporal de cada pasada y separó agua abierta, vegetación inundada, terreno y observaciones sin clasificar según las clases efectivamente disponibles en el recorte. La lectura se refiere a una franja analítica del paisaje.
+Producto: https://doi.org/10.5067/OPDSWS1-L3V1
+Licencia del producto: https://registry.opendata.aws/nasa-snwg-opera/
+Política de datos y citación: https://podaac.jpl.nasa.gov/CitingPODAAC
+Granos de origen, banda B01_WTR:
+OPERA_L3_DSWx-S1_T18PXR_20250310T104155Z_20250311T171130Z_S1A_30_v1.0
+OPERA_L3_DSWx-S1_T18PXR_20250322T104141Z_20250322T211805Z_S1A_30_v1.0
+
+Agua observada por óptica · 12 de marzo de 2025
+Imagen Landsat 9 cortesía del U.S. Geological Survey. USGS/NASA, Landsat 8–9 OLI/TIRS Collection 2 Level-2, escena LC09_L2SP_008054_20250312_02_T1. Datos Landsat de dominio público. Graph of Life contrastó la clasificación de calidad de píxel y la respuesta espectral, y conservó los centros con nube, falta de dato o desacuerdo como desconocidos. El producto derivado lleva la atribución a USGS y el de la geometría a IGAC.
+Producto: https://doi.org/10.5066/P9OGBGM6
+Avisos de datos: https://www.usgs.gov/centers/eros/data-citation
+
+Color natural y relieve · contexto del paisaje
+La imagen de orientación procede de Copernicus Sentinel-2C L2A, S2C_18PXR_20250201_0_L2A, observación del 1 de febrero de 2025. COG distribuido por Earth Search/Element 84. Graph of Life recortó y reproyectó el color natural TCI para componerlo con el relieve. Contains modified Copernicus Sentinel data (2025). Las fechas de las observaciones del caño se indican en cada imagen de marzo.
+Producto: https://earth-search.aws.element84.com/v1/collections/sentinel-2-l2a/items/S2C_18PXR_20250201_0_L2A
+Condiciones Sentinel: https://dataspace.copernicus.eu/terms-and-conditions
+
+La malla y la textura local utilizan Copernicus DEM GLO-30, datum vertical EGM2008. El fondo regional de El Banco utiliza Copernicus DEM GLO-90. Graph of Life calculó el sombreado y la perspectiva para lectura de superficie. El modelo incluye vegetación e infraestructura. Quien redistribuya cada derivado debe facilitar los avisos y condiciones del artículo 6 de su licencia.
+produced using Copernicus WorldDEM-30 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved
+The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM-30
+produced using Copernicus WorldDEM™-90 © DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved
+The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM™-90
+Licencias: https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf
+
+Nivel del río, meteorología y cálculo municipal
+IDEAM. Niveles medios diarios en cuerpos de agua continentales de Colombia, serie NV_MEDIA_D, estación 25027020, archivo 0025027020-NV_MEDIA_D.csv. Niveles en centímetros respecto a la referencia de la estación. CC BY-SA 4.0. Los niveles, sus diferencias a siete días y la fase derivada de ellos conservan esa licencia. La síntesis hidrológica municipal de Graph of Life se distribuye bajo CC BY-SA 4.0. En una reutilización de la síntesis o una adaptación, conservar el crédito y la licencia y declarar los cambios. La señal de la estación regional y el agua observada en la franja del caño tienen soportes diferentes.
+Ficha del conjunto y distribución: https://www.datos.gov.co/d/9fxi-fthb
+Serie original: https://datos.ideam.gov.co/s3-estacionesideam/observaciones/historicos/csv/NV_MEDIA_D/0025027020-NV_MEDIA_D.csv
+Licencia de la síntesis hidrológica y campos IDEAM: https://creativecommons.org/licenses/by-sa/4.0/
+
+Departamento Administrativo Nacional de Estadística - DANE: www.dane.gov.co. Marco Geoestadístico Nacional 2025, municipio de El Banco, código 47245, CC BY 4.0. Graph of Life usó el límite administrativo para seleccionar centros de píxel y resumir el agua visible por sectores. Se conserva el aviso de fuente y los cambios de representación.
+MGN 2025, capa municipios: https://geoportal.dane.gov.co/mparcgis/rest/services/MGN2025/Serv_CapasMGN_2025/MapServer/317
+Condiciones DANE: https://geoportal.dane.gov.co/acerca-del-geoportal/licencia-y-condiciones-de-uso/
+
+El análisis municipal usa observaciones Copernicus Sentinel-2 L2A de 2019 a 2025. Contains modified Copernicus Sentinel data (2019–2025). NASA Langley Research Center’s Prediction Of Worldwide Energy Resources (POWER) Project, funded through NASA’s Earth Science Division, aportó la precipitación regional usada en la comparación retrospectiva. Graph of Life agregó la lluvia del mes previo y cotejó la estimación municipal con y sin el nivel del río en años excluidos del ajuste.
+Referencia POWER: https://power.larc.nasa.gov/docs/referencing/
+
+Los escenarios, la programación y la interpretación son obra de Graph of Life. Cada insumo mantiene su licencia, avisos y autoría. Las descargas geolocalizadas deben conservar esos créditos con el dato. Las coordenadas de posibles visitas se obtuvieron de cartografía y cálculos y requieren confirmación y permiso de acceso en campo.

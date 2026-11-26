@@ -1,0 +1,33 @@
+/* Graph of Life brand v1.0.0 · tokens.json · editorial municipal */
+.eb-municipio {padding:var(--gol-s7) var(--margen);color:var(--gol-mist);background:var(--gol-abyss);border-top:var(--rule) solid var(--gol-muted)}
+.eb-municipio .eb-intro {display:grid;grid-template-columns: minmax(0,1.25fr) minmax(0,1fr);gap:var(--gol-s6);align-items:end;margin-bottom:var(--gol-s5)}
+.eb-intro h2 {max-width:22ch;margin:0}.eb-intro p:last-child {margin-block-end:0;max-width:var(--gol-measure)}
+.eb-comparacion {display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:var(--gol-s6);border-block:var(--rule) solid var(--gol-muted);padding-block:var(--gol-s4)}
+.eb-grafico h3,.eb-detalle h3 {margin:0}.eb-cabecera p,.eb-mascara p,.eb-base {font-size:var(--caption);color:var(--gol-sand)}
+.eb-modos {display:flex;gap:0;margin:var(--gol-s4) 0}.eb-modos[hidden] {display:none}.eb-modos legend {margin-bottom:var(--gol-s2)}
+.eb-modos label {position:relative;padding:0}.eb-modos input {position:absolute;inset:0;opacity:0;margin:0}.eb-modos span {display:block;padding:var(--gol-s2) var(--gol-s3);border:var(--rule) solid var(--gol-muted);font:500 var(--caption)/var(--headline-leading) var(--gol-mono)}
+.eb-modos input:checked + span {background:var(--gol-sand);color:var(--gol-abyss)}.eb-modos input:focus-visible+span {outline:var(--strong-rule) solid var(--gol-signal);outline-offset:var(--gol-s1)}
+.eb-leyenda {display:flex;flex-wrap:wrap;gap:var(--gol-s3);margin-bottom:var(--gol-s2);font:500 var(--caption)/var(--headline-leading) var(--gol-mono)}
+.eb-leyenda span:before {content:"";display:inline-block;width:var(--gol-s2);height:var(--gol-s2);margin-right:var(--gol-s1);vertical-align:baseline}
+.eb-clave-sin:before {border:var(--rule) solid var(--gol-sand)}.eb-clave-con:before {background:var(--gol-connection)}
+.eb-eje,.eb-dia {display:grid;grid-template-columns:12ch minmax(0,1fr) 4.5ch;gap:var(--gol-s2);align-items:center}
+.eb-eje,.eb-dia,.eb-mae,.eb-rotulo,.eb-mascara strong {font-family:var(--gol-mono);font-variant-numeric:tabular-nums}
+.eb-eje {font-size:var(--micro);color:var(--gol-sand);padding:var(--gol-s2)}.eb-eje span:nth-child(2) {display:flex;justify-content:space-between;padding-inline:4%}.eb-eje i {font-style:normal}.eb-eje span:last-child {text-align:right}
+.eb-dia {width:100%;background:transparent;color:var(--gol-mist);border:0;border-block-start:var(--rule) solid var(--gol-slate);padding:var(--gol-s2);text-align:left;font-size:var(--caption);cursor:pointer}
+.eb-dia[aria-pressed=true],.eb-dia:hover {background:var(--gol-slate)}.eb-dia:disabled {cursor:default;color:var(--gol-mist);opacity:1}
+.eb-dia>span:last-child {text-align:right}.eb-dia svg {width:100%;height:var(--gol-s3);overflow:visible}
+.eb-dia line {vector-effect:non-scaling-stroke}.eb-guia {stroke:var(--gol-muted);stroke-width:var(--rule)}.eb-tramo {stroke:var(--gol-sand);stroke-width:var(--strong-rule)}
+.eb-sin {stroke:var(--gol-sand);stroke-width:var(--gol-s1)}.eb-con {stroke:var(--gol-connection);stroke-width:var(--gol-s2)}
+.eb-municipio[data-nivel=sin] :is(.eb-con,.eb-tramo,.eb-clave-con) {visibility:hidden}
+.eb-detalle {border-inline-start:var(--rule) solid var(--gol-muted);padding-inline-start:var(--gol-s5)}
+.eb-mae {margin:0;color:var(--gol-sand);line-height:1}.eb-mae output {font-size:clamp(var(--display-min),5vw,var(--title-size));color:var(--gol-caution)}.eb-mae span {font-size:var(--caption)}.eb-promedio {margin:var(--gol-s3) 0 var(--gol-s1)}.eb-base {margin:0}
+.eb-fecha {border-block-start:var(--rule) solid var(--gol-slate);margin-top:var(--gol-s4);padding-top:var(--gol-s4)}.eb-fecha h3 {font-size:var(--heading-small)}.eb-fecha p {margin-block:var(--gol-s2) var(--gol-s3)}
+.eb-mascara {display:grid;grid-template-columns:minmax(var(--gol-s7),var(--gol-s8)) minmax(0,1fr);gap:var(--gol-s3);align-items:center}.eb-mascara svg{width:100%}.eb-mascara strong {display:block;color:var(--gol-mist)}.eb-rotulo {font-size:var(--micro);color:var(--gol-sand)}.eb-mascara p {margin:var(--gol-s1) 0 0;line-height:var(--headline-leading)}.eb-alta {fill:var(--gol-sand)}.eb-parcial {fill:var(--gol-muted)}.eb-vacia {fill:var(--gol-slate)}
+.eb-conclusion {max-width:var(--gol-measure);margin:var(--gol-s5) 0 var(--gol-s3);font-size:var(--copy-size)}
+.eb-municipio details {max-width:var(--gol-measure)}.eb-tabla {overflow-x:auto}.eb-enlaces {display:flex;gap:var(--gol-s3);flex-wrap:wrap;margin-top:var(--gol-s4)}.eb-enlaces a {font-size:var(--caption)}
+@media(max-width:740px){.eb-municipio{padding:var(--gol-s5) var(--margen)}.eb-municipio .eb-intro,.eb-comparacion{grid-template-columns:1fr;gap:var(--gol-s3)}.eb-detalle{border-inline:0;border-block-start:var(--rule) solid var(--gol-slate);padding:var(--gol-s4) 0 0}.eb-modos span{padding:var(--gol-s2)}.eb-eje,.eb-dia{grid-template-columns:11ch minmax(0,1fr) 4ch;gap:var(--gol-s1)}}
+
+.eb-municipio[data-nivel=sin] .eb-mae output{color:var(--gol-sand)}
+
+.eb-dia>span:first-child{white-space:nowrap}.eb-compacto,.eb-enlaces [hidden]{display:none}
+@media(max-width:740px){.eb-compacto{display:block;font:500 var(--caption)/var(--flow-leading) var(--gol-mono);color:var(--gol-caution);margin:0 0 var(--gol-s3)}.eb-municipio[data-nivel=sin] .eb-compacto{color:var(--gol-sand)}}

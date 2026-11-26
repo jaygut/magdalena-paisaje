@@ -1,0 +1,7 @@
+<!-- Graph of Life brand v1.0.0 · tokens.json -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Graph of Life</title>
+  <path fill="rgb(14 42 71)" d="M0 0h32v32H0Z"/>
+  <path stroke="rgb(26 168 155)" d="m7 23 9-14 9 9m-9-9 2 16"/>
+  <path fill="rgb(58 214 163)" d="M4 20h6v6H4Zm9-14h6v6h-6Zm9 9h6v6h-6Zm-7 7h6v6h-6Z"/>
+</svg>

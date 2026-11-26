@@ -1,0 +1,60 @@
+/* Graph of Life — brand layer v1.0
+   Generated from brand/tokens.json. Do not hand-edit values.
+   Import this before any component CSS. Never write a raw hex downstream. */
+
+
+:root {
+  /* ink */
+  --gol-navy:  #0E2A47;
+  --gol-abyss: #08203A;
+  --gol-slate: #243B4A;
+  --gol-muted: #5C6E78;
+
+  /* accents — bright for dark grounds, deep for text on light */
+  --gol-teal:  #1AA89B;  --gol-teal-deep:  #0E7A70;
+  --gol-green: #3AD6A3;  --gol-green-deep: #0F8059;
+  --gol-coral: #E8694D;  --gol-coral-deep: #C2442A;
+  --gol-amber: #F2A24E;  --gol-amber-deep: #A86410;
+
+  /* grounds */
+  --gol-sand:  #E9E1CC;
+  --gol-paper: #F7F6F2;
+  --gol-bone:  #FBFAF6;
+  --gol-mist:  #EAF1F1;
+  --gol-hairline: #D7DEE2;
+
+  /* semantic aliases — prefer these in components */
+  --gol-connection: var(--gol-teal);
+  --gol-signal:     var(--gol-green);
+  --gol-risk:       var(--gol-coral);
+  --gol-caution:    var(--gol-amber);
+
+  /* type */
+  --gol-sans: 'IBM Plex Sans', Aptos, Calibri, Arial, sans-serif;
+  --gol-mono: 'IBM Plex Mono', Consolas, 'Cascadia Mono', monospace;
+
+  /* geometry */
+  --gol-s1: 4px;  --gol-s2: 8px;  --gol-s3: 16px; --gol-s4: 24px;
+  --gol-s5: 32px; --gol-s6: 48px; --gol-s7: 64px; --gol-s8: 96px;
+  --gol-radius: 2px;
+  --gol-measure: 68ch;
+}
+
+:root {
+  --title-size: 72px;
+  --display-min: 44px;
+  --head-size: 40px;
+  --heading-small: 26px;
+  --copy-size: 16px;
+  --caption: 13px;
+  --micro: 12px;
+  --micro-track: 0.16em;
+  --display-track: -0.025em;
+  --rule: 1px;
+  --strong-rule: 2px;
+  --veil: 0.55;
+  --faint: 0.22;
+  --display-leading: 1.05;
+  --flow-leading: 1.65;
+  --headline-leading: 1.15;
+}

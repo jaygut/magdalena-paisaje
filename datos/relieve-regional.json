@@ -1,0 +1,127 @@
+{
+ "product": "Copernicus DEM GLO-90",
+ "source": "https://registry.opendata.aws/copernicus-dem/",
+ "credit": "Produced using Copernicus WorldDEM™-90 © DLR e.V. 2010–2014 and © Airbus Defence and Space GmbH 2014–2018 provided under COPERNICUS by the European Union and ESA; all rights reserved.",
+ "notice": "The organisations in charge of the Copernicus programme by law or by delegation do not incur any liability for any use of the Copernicus WorldDEM™-90.",
+ "crs": "EPSG:4326",
+ "vertical_datum": "EGM2008",
+ "meaning": "Modelo digital de superficie con vegetación y construcciones. El sombreado y su contraste permiten leer la forma del relieve.",
+ "license": "https://dataspace.copernicus.eu/sites/default/files/media/files/2025-06/copernicus_contributing_mission_data_access_v2_cop_dem_licenses.pdf",
+ "regions": {
+  "CC": {
+   "file": "media/copernicus-cc.webp",
+   "sha256": "2679163749e08f706b5cfa74efe69b1d1542bb5201d7af90d998001907c7408c",
+   "bounds": [
+    -76.7,
+    3.4,
+    -74.1,
+    5.35
+   ],
+   "width": 1872,
+   "height": 1404,
+   "native_m": 90,
+   "arcsec": 5,
+   "light_azimuth": 315,
+   "light_altitude": 45,
+   "illumination_percentiles": [
+    1.5,
+    98.5
+   ],
+   "grid_min_m": 17.5,
+   "grid_max_m": 5266.28955078125,
+   "valid_cells": 2628288,
+   "sources": [
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N03_00_W077_00_DEM/Copernicus_DSM_COG_30_N03_00_W077_00_DEM.tif",
+     "sha256": "296dd60d4819512de178a635e32e2af111b4fd8691d014ecde0ea60e25810467",
+     "bytes": 5248532
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N04_00_W077_00_DEM/Copernicus_DSM_COG_30_N04_00_W077_00_DEM.tif",
+     "sha256": "2f314e9406293dab4eb54039c04ee2402853c1fe9ca272a56f5cc09393300120",
+     "bytes": 5644290
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N05_00_W077_00_DEM/Copernicus_DSM_COG_30_N05_00_W077_00_DEM.tif",
+     "sha256": "17196e491a38cf4d5c14caa1c0241728ff16bc92335c689edb98aa39250344b6",
+     "bytes": 5807043
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N03_00_W076_00_DEM/Copernicus_DSM_COG_30_N03_00_W076_00_DEM.tif",
+     "sha256": "ba27fd38b6f33735ec0eee59391d690f92f334b0d0854a3f1ba76c9f7c8325a9",
+     "bytes": 5412887
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N04_00_W076_00_DEM/Copernicus_DSM_COG_30_N04_00_W076_00_DEM.tif",
+     "sha256": "70a480b92be0a58da1a65d2c727ffed8a54f60940c3f0a3a5149a1f877e23f8e",
+     "bytes": 5257526
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N05_00_W076_00_DEM/Copernicus_DSM_COG_30_N05_00_W076_00_DEM.tif",
+     "sha256": "447d1a3c079fcf78c77eb442a2571c24d22f481a4dcc123584ea20a53d558caf",
+     "bytes": 5411637
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N03_00_W075_00_DEM/Copernicus_DSM_COG_30_N03_00_W075_00_DEM.tif",
+     "sha256": "8fb54dda43581168d37265c3d11ed75e1bda8aae575aa25ede5bb63466f15553",
+     "bytes": 5314297
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N04_00_W075_00_DEM/Copernicus_DSM_COG_30_N04_00_W075_00_DEM.tif",
+     "sha256": "5d0338d7f675bb07deef9942c23ef7e5895330a4b09fcd1b3cf6fe01af7008ea",
+     "bytes": 5216912
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N05_00_W075_00_DEM/Copernicus_DSM_COG_30_N05_00_W075_00_DEM.tif",
+     "sha256": "969bd0c8d69d031dbe052b60525be0d79f7818564323d67f64767fd516d745f9",
+     "bytes": 5556581
+    }
+   ]
+  },
+  "EB": {
+   "file": "media/copernicus-eb.webp",
+   "sha256": "404b33d41c2203b6b761855771b2edb01d9a983bae555ef60ef4b088f06306c8",
+   "bounds": [
+    -75.0,
+    8.25,
+    -73.15,
+    10.0
+   ],
+   "width": 1332,
+   "height": 1260,
+   "native_m": 90,
+   "arcsec": 5,
+   "light_azimuth": 315,
+   "light_altitude": 45,
+   "illumination_percentiles": [
+    1.5,
+    98.5
+   ],
+   "grid_min_m": -227.37820434570312,
+   "grid_max_m": 2851.439208984375,
+   "valid_cells": 1678320,
+   "sources": [
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N08_00_W075_00_DEM/Copernicus_DSM_COG_30_N08_00_W075_00_DEM.tif",
+     "sha256": "4cf272acfb3dc608a788142d7bf52da8eb66e2c75fb0ec15969238d5102a91d4",
+     "bytes": 5360889
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N09_00_W075_00_DEM/Copernicus_DSM_COG_30_N09_00_W075_00_DEM.tif",
+     "sha256": "f6f91aaaa613696fcd446d5337cbf80dd9ac9b6639781c1581ef5d1112f4d31e",
+     "bytes": 5281949
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N08_00_W074_00_DEM/Copernicus_DSM_COG_30_N08_00_W074_00_DEM.tif",
+     "sha256": "4c9efc1cf53f2de4a46c49b762e7050801d40f283f7f169e9428c0dbf9ca4cca",
+     "bytes": 5576939
+    },
+    {
+     "url": "https://copernicus-dem-90m.s3.eu-central-1.amazonaws.com/Copernicus_DSM_COG_30_N09_00_W074_00_DEM/Copernicus_DSM_COG_30_N09_00_W074_00_DEM.tif",
+     "sha256": "e06fb903bfea532c948e6e3f91f8b89d3383c4b5dfec0ad29601d90ced8d9103",
+     "bytes": 5407797
+    }
+   ]
+  }
+ }
+}

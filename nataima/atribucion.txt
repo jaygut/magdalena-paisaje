@@ -1,0 +1,30 @@
+Nataima • Fuentes de la escena de mango
+Edición local de Magdalena, Graph of Life, 26 de noviembre de 2026
+
+Recuentos en inflorescencias y desarrollo de frutos
+
+Jenny Paola Corredor P. y Jairo García L., «Fenología reproductiva, biología floral y visitantes florales en los cultivares de mango (Mangifera indica L.) Hilacha y Tommy Atkins en el valle del alto Magdalena (Colombia)», Corpoica. Ciencia y Tecnología Agropecuaria, vol. 12(1), 2011, pp. 21–32. La revista registra el 29 de diciembre de 2010 como fecha de publicación en línea. Las pp. 22–23 describen el trabajo de campo, las pp. 28–29 los ejemplares capturados y la p. 25 el desarrollo de los frutos a partir de 2 cm de diámetro.
+https://doi.org/10.21930/rcta.vol12_num1_art:212
+https://revistacta.agrosavia.co/index.php/revista/article/view/212
+
+El artículo se ofrece bajo Creative Commons Atribución–NoComercial–SinDerivadas 4.0 Internacional.
+https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+En observaciones.json, Graph of Life reúne cifras puntuales del estudio y calcula sumas, residuos y proporciones sobre el total de ejemplares de cada selección. La agrupación de la escena reúne cuatro franjas de una jornada. El método midió capturas con red. La duración del desarrollo de frutos procede de un seguimiento fenológico independiente. Las tablas, fotografías y figuras del trabajo colombiano se consultan en la publicación original.
+
+Fotografía de referencia en flor de mango
+
+Blaire M. Kleiman, Suzanne Koptur y Krishnaswamy Jayachandran, «Weeds Enhance Pollinator Diversity and Fruit Yield in Mango», Insects 12(12), 1114 (2021), figura 5a. © 2021 los autores. Licencia Creative Commons Atribución 4.0 Internacional. La foto muestra una mosca de la familia Calliphoridae en flor de mango, en el contexto de un trabajo realizado en Homestead, Florida, Estados Unidos. El pie de la fotografía identifica a la mosca y deja la variedad de mango sin especificar.
+https://doi.org/10.3390/insects12121114
+https://www.mdpi.com/2075-4450/12/12/1114#fig_body_display_insects-12-01114-f005
+https://creativecommons.org/licenses/by/4.0/
+
+Para flor-mango.webp, Graph of Life recortó el panel 5a de la figura, redujo sus dimensiones y lo convirtió a WebP. La foto ilustra el contacto de un insecto con la flor. Las observaciones de Nataima conservan su propia procedencia. Al reutilizar este archivo deben acompañarlo el crédito a los autores, el enlace al artículo, la licencia y la indicación del recorte y la conversión.
+
+Referencias metodológicas del piloto propuesto
+
+A. Nurul Huda y colaboradores, «Pollination Services of Mango Flower Pollinators», Journal of Insect Science 15(1), 113 (2015). En dos cultivares de Malasia compararon panículas abiertas, panículas abiertas con polen añadido a mano y panículas cubiertas con malla. Contaron frutos formados a los 30–35 días. El artículo describe las condiciones de cada tratamiento.
+https://doi.org/10.1093/jisesa/iev090
+
+Gabriel Marcacci y colaboradores, «Direct and indirect effects of urbanization, pesticides and wild insect pollinators on mango yield», Journal of Applied Ecology 60 (2023), 2132–2143. En India siguieron panículas con distintos grados de acceso para los visitantes, contaron frutos al cosechar y pesaron los maduros. La verificación de entrega y calidad comercial en Tolima es una propuesta de trabajo con productores y compradores.
+https://doi.org/10.1111/1365-2664.14476

@@ -1,0 +1,18 @@
+{
+  "bounds": [
+    -74.937,
+    4.125,
+    -74.845,
+    4.213
+  ],
+  "source": "https://sentinel-cogs.s3.us-west-2.amazonaws.com/sentinel-s2-l2a-cogs/18/N/WK/2024/1/S2B_18NWK_20240123_0_L2A/TCI.tif",
+  "date": "2024-01-23",
+  "attribution": "Contiene datos modificados de Copernicus Sentinel-2 (2024). Distribución COG Earth Search, Element 84.",
+  "license": "https://dataspace.copernicus.eu/terms-and-conditions",
+  "product": "S2B_18NWK_20240123_0_L2A",
+  "cloud_cover_product_percent": 1.906381,
+  "method": "Color natural L2A TCI. Recorte y reproyección bilineal a EPSG:4326. Contexto visual, sin clasificación temática derivada.",
+  "width": 1024,
+  "height": 976,
+  "sha256": "66e9b7c2896d266807d528b0015f331823a52d06b6b97442a8fe869dec6fd3c7"
+}

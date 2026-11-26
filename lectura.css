@@ -1,0 +1,61 @@
+/* Graph of Life brand v1.0.0 · tokens.json · IBM Plex Sans / IBM Plex Mono */
+:root{color-scheme:dark;--margen:clamp(var(--gol-s3),5vw,var(--gol-s8));scroll-padding-top:var(--gol-s7)}
+*{box-sizing:border-box}
+body{margin:0;color:var(--gol-mist);background:var(--gol-abyss);font:400 var(--copy-size)/var(--flow-leading) var(--gol-sans)}
+a{color:var(--gol-signal);text-underline-offset:var(--gol-s1)}
+:focus-visible{outline:var(--strong-rule) solid var(--gol-signal);outline-offset:var(--gol-s1)}
+.saltar{position:fixed;top:0;left:0;transform:translateY(-150%);z-index:20;background:var(--gol-abyss)}.saltar:focus{transform:none}
+.barra{position:sticky;top:0;display:flex;justify-content:space-between;align-items:center;gap:var(--gol-s4);background:var(--gol-abyss);border-bottom:var(--rule) solid var(--gol-slate);padding:var(--gol-s2) var(--margen);z-index:10}
+.barra a{text-decoration:none;color:var(--gol-mist)}.barra nav{display:flex;gap:var(--gol-s4);overflow-x:auto;align-items:center}
+.barra nav a{font:500 var(--caption)/var(--flow-leading) var(--gol-mono);padding:var(--gol-s2) 0}
+.barra nav a:hover,.barra nav a:focus-visible{color:var(--gol-signal)}.marca{font-weight:600;white-space:nowrap}
+.portada{min-height:calc(100svh - var(--gol-s6));position:relative;display:flex;align-items:center;isolation:isolate}
+.terreno{position:absolute;inset:0;z-index:-1;margin:0;overflow:hidden;background:var(--gol-abyss)}
+.terreno img,.terreno #terreno-oblicuo,.terreno canvas,.terreno .maplibregl-canvas-container{position:absolute;inset:0;width:100%;height:100%}
+.terreno img{object-fit:cover}.terreno figcaption{position:absolute;right:var(--margen);bottom:var(--gol-s6);background:var(--gol-abyss);color:var(--gol-sand);padding:var(--gol-s1) var(--gol-s2);font:400 var(--micro)/var(--flow-leading) var(--gol-mono)}
+.apertura{margin:var(--gol-s7) var(--margen);padding:var(--gol-s4) var(--gol-s4) var(--gol-s4) 0;max-width:min(45%,var(--gol-measure));}
+h1,h2,h3{color:var(--gol-bone);line-height:var(--headline-leading);text-wrap:balance;margin:0 0 var(--gol-s4);letter-spacing:var(--display-track)}
+h1{font-size:clamp(var(--head-size),6.2vw,var(--title-size));line-height:var(--display-leading);max-width:14ch}
+h2{font-size:clamp(var(--heading-small),3.8vw,calc(var(--head-size) + var(--gol-s2)));}
+h3{font-size:var(--heading-small)}
+.lugar,.nota,.gran-dato,.dato,td{font-family:var(--gol-mono);font-variant-numeric:tabular-nums}
+.lugar{color:var(--gol-signal);letter-spacing:var(--micro-track);font-size:var(--micro);text-transform:uppercase;margin:0 0 var(--gol-s3)}
+.apertura p:not(.lugar){max-width:39ch;font-size:clamp(var(--copy-size),1.4vw,calc(var(--copy-size) + var(--gol-s1)))}
+.avanza{display:inline-block;margin-top:var(--gol-s3);padding-bottom:var(--gol-s2);border-bottom:var(--rule) solid var(--gol-connection);text-decoration:none}
+.capitulo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr);align-items:center;gap:var(--gol-s7);padding:var(--gol-s8) var(--margen);border-top:var(--rule) solid var(--gol-slate)}
+.capitulo:nth-of-type(odd){background:var(--gol-navy)}.prosa,.figura{max-width:var(--gol-measure);margin:0;width:100%}.figura{border-block:var(--rule) solid var(--gol-muted);padding:var(--gol-s4) 0}
+figcaption{font-weight:600}figcaption small{display:block;color:var(--gol-sand);font-weight:400;font-size:var(--caption)}
+fieldset{border:0;padding:0;margin:var(--gol-s3) 0;display:flex;flex-wrap:wrap;gap:var(--gol-s2) var(--gol-s4)}
+fieldset legend{font:500 var(--caption)/var(--flow-leading) var(--gol-mono);color:var(--gol-sand)}
+label{cursor:pointer;padding-block:var(--gol-s1)}input{accent-color:var(--gol-connection)}
+fieldset[hidden],[hidden]{display:none}
+.banda{display:grid;grid-template-columns:4.5ch 1fr 7ch;align-items:center;gap:var(--gol-s2);margin-block:var(--gol-s3);font:500 var(--copy-size)/var(--headline-leading) var(--gol-mono)}
+.banda svg{width:100%;height:var(--gol-s2);background:var(--gol-slate);fill:var(--gol-connection)}.banda strong{text-align:right}
+.gran-dato{display:block;font-size:clamp(var(--head-size),6vw,var(--title-size));color:var(--gol-caution);margin:var(--gol-s4) 0;line-height:var(--display-leading)}
+.nota,.leyenda,.pie{font-size:var(--caption);color:var(--gol-sand)}.nota{padding-left:var(--gol-s3);border-left:var(--strong-rule) solid var(--gol-muted)}
+.solapamiento{margin:var(--gol-s4) 0 var(--gol-s2);display:grid;grid-template-columns:231fr 395fr 231fr;text-align:center;font:500 var(--heading-small)/var(--flow-leading) var(--gol-mono)}
+.solapamiento span{background:var(--gol-slate);padding-block:var(--gol-s2)}.solapamiento span:nth-child(2){background:var(--gol-teal-deep);color:var(--gol-bone)}.leyenda{text-align:center}
+.dos-cifras{display:flex;gap:var(--gol-s6);margin:var(--gol-s4) 0}.dos-cifras dd{margin:0;font:500 var(--head-size)/var(--headline-leading) var(--gol-mono);color:var(--gol-signal)}
+details{margin-top:var(--gol-s4)}summary{color:var(--gol-sand);cursor:pointer;text-decoration:underline;text-underline-offset:var(--gol-s1)}
+table{width:100%;border-collapse:collapse;font-size:var(--caption);margin-block:var(--gol-s3)}td,th{text-align:left;border-bottom:var(--rule) solid var(--gol-slate);padding:var(--gol-s2) var(--gol-s1)}caption{text-align:left}
+.fichas{display:flex;flex-wrap:wrap;gap:var(--gol-s2) var(--gol-s4)}.fichas a{padding:var(--gol-s2) 0}.pie{padding:var(--gol-s4) var(--margen) var(--gol-s6)}
+@media(max-width:740px){:root{scroll-padding-top:calc(var(--gol-s8) + var(--gol-s2))}
+.barra{align-items:flex-start;flex-direction:column;gap:0}.barra nav{width:100%;justify-content:space-between;gap:var(--gol-s2)}
+.portada{display:block;min-height:0}.terreno{position:relative;height:min(40svh,calc(var(--gol-s8) * 3));z-index:0}.terreno figcaption{bottom:var(--gol-s2);left:var(--margen);right:auto}
+.apertura{max-width:none;margin:0;padding:var(--gol-s5) var(--margen) var(--gol-s6)}.capitulo{grid-template-columns:1fr;gap:var(--gol-s4);padding:var(--gol-s6) var(--margen)}}
+.credito{max-width:var(--gol-measure);margin:auto;padding:var(--gol-s6) var(--gol-s3)}.credito h2{font-size:var(--heading-small);margin:var(--gol-s5) 0 var(--gol-s3)}
+
+/* Graph of Life brand v1.0.0 · 2021 atlas and separately dated archive. */
+.archivo-circuito {margin-block-start:var(--gol-s4);border-block-start:var(--rule) solid var(--gol-slate);padding-block-start:var(--gol-s3)}
+.archivo-circuito > .figura {max-width:100%;border:0}
+.archivo-circuito table {font-variant-numeric:tabular-nums}
+.archivo-nota {margin-block-start:var(--gol-s4)}
+#worldcover {scroll-margin-block-start:var(--gol-s7)}
+.portada .apertura {padding:var(--gol-s4);background:var(--gol-abyss);border-inline-start:var(--strong-rule) solid var(--gol-connection)}
+.portada .apertura h1 {max-width:11ch}
+@media (min-width:741px) {
+ .portada .apertura {margin-left:var(--margen);max-width:min(43%,var(--gol-measure))}
+}
+@media(max-width:740px) {
+ .portada .apertura {padding:var(--gol-s5) var(--margen);border-inline-start:0}
+}

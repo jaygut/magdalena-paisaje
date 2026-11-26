@@ -1,0 +1,35 @@
+/* Graph of Life brand v1.0.0 · tokens.json · gallery for the independently computed WorldCover scene */
+.wc{--gutter:var(--margen, var(--gol-s4));position:relative;border-block:var(--rule) solid var(--gol-slate);background:var(--gol-abyss);color:var(--gol-mist);min-width:0;isolation:isolate;scroll-margin-top:var(--gol-s2)}
+.wc-intro,.wc-panel,.wc-leyenda,.wc-campo{display:grid;align-items:end;gap:var(--gol-s6);padding-inline:var(--gutter)}
+.wc-intro{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);padding-block:var(--gol-s6) var(--gol-s4)}
+.wc-intro h2{font:600 clamp(var(--head-size),4.5vw,var(--title-size))/var(--display-leading) var(--gol-sans);letter-spacing:var(--display-track);max-width:22ch;margin:0}
+.wc-intro .lugar,.wc-campo .lugar{margin:0 0 var(--gol-s2)}.wc-intro p:last-child,.wc-campo p{margin:0;line-height:var(--flow-leading);max-width:var(--gol-measure)}
+.wc-lab{margin:0;max-width:none}.wc-mapa{position:relative;isolation:isolate;overflow:hidden;height:clamp(calc(var(--gol-s8)*4),64svh,calc(var(--gol-s8)*7));min-height:0;background:var(--gol-abyss);border-block:var(--rule) solid var(--gol-slate)}
+.wc-poster,.wc-canvas{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.wc [hidden]{display:none!important}.wc-canvas{cursor:crosshair;touch-action:pan-y}.wc-canvas:focus-visible{outline-offset:calc(-1 * var(--gol-s1))}
+.wc-rotulo,.wc-zoom,.wc-falla,.wc-colores,.wc-examen,.wc-opts,.wc-aux,.wc-derecho{font:400 var(--micro)/var(--headline-leading) var(--gol-mono)}
+.wc-rotulo,.wc-zoom{position:absolute;top:var(--gol-s3);padding:var(--gol-s2) var(--gol-s3);background:var(--gol-abyss);color:var(--gol-paper)}
+.wc-rotulo{left:var(--gutter);display:flex;gap:var(--gol-s2);align-items:center;pointer-events:none}.wc-punto{width:var(--gol-s2);height:var(--gol-s2);border-radius:50%;border:var(--strong-rule) solid var(--gol-connection)}
+.wc-zoom{right:var(--gutter);cursor:pointer;border:var(--rule) solid var(--gol-muted)}
+.wc-falla{position:absolute;inset:auto var(--gutter) var(--gol-s5);background:var(--gol-abyss);padding:var(--gol-s3);border-inline-start:var(--strong-rule) solid var(--gol-caution);color:var(--gol-paper)}
+.wc button,.wc label{color:inherit}.wc-falla button,.wc-aux button{color:var(--gol-sand);background:none;border:0;border-bottom:var(--rule) solid var(--gol-connection);font:inherit;cursor:pointer;padding:var(--gol-s2) 0}
+.wc-leyenda{grid-template-columns:1fr auto;align-items:center;padding-block:var(--gol-s3);border-bottom:var(--rule) solid var(--gol-slate)}
+.wc-colores,.wc-examen{line-height:var(--flow-leading);font-weight:400}.wc-colores{display:flex;align-items:center;flex-wrap:wrap;gap:var(--gol-s1) var(--gol-s3)}.wc-examen{color:var(--gol-sand);text-align:right}
+.wc-clave{display:inline-flex;align-items:center;gap:var(--gol-s1)}.wc-clave i{width:var(--gol-s2);height:var(--gol-s2);display:inline-block;background:var(--gol-signal)}.wc-clave i[data-color="pos"]{background:var(--gol-caution)}.wc-clave i[data-color="neg"]{background:var(--gol-connection)}.wc-clave i[data-color="corte"]{background:none;border:var(--rule) dashed var(--gol-risk)}
+.wc-panel{grid-template-columns:1fr minmax(0,.62fr);align-items:stretch;padding-block:var(--gol-s4) var(--gol-s3)}
+.wc-grupos,.wc-aux{display:flex;align-items:end;gap:var(--gol-s2) var(--gol-s5);flex-wrap:wrap}.wc fieldset{margin:0;padding:0;border:0;display:block;min-width:0}.wc fieldset legend,.wc-resultado h3{font:400 var(--caption)/var(--headline-leading) var(--gol-mono);letter-spacing:0;color:var(--gol-sand);padding:0;margin:0 0 var(--gol-s2)}
+.wc-opts{display:flex;align-items:stretch;flex-wrap:wrap;gap:0}.wc-opts label{padding:0;position:relative;cursor:pointer}.wc-opts label input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;margin:0}.wc-opts span{display:block;padding:var(--gol-s2) var(--gol-s3);border:var(--rule) solid var(--gol-muted);margin-right:calc(-1 * var(--rule));min-width:calc(var(--gol-s5) + var(--gol-s2));text-align:center}
+.wc-opts input:checked+span{background:var(--gol-sand);color:var(--gol-abyss);border-color:var(--gol-sand)}
+.wc-opts input:focus-visible+span{outline:var(--strong-rule) solid var(--gol-signal);outline-offset:var(--gol-s1);position:relative;z-index:1}
+.wc fieldset.wc-etapas{margin-top:var(--gol-s3)}.wc-aux{align-items:center;margin-top:var(--gol-s2)}.wc-aux label{display:flex;align-items:center;gap:var(--gol-s1);cursor:pointer}
+.wc-resultado{padding-left:var(--gol-s4);border-left:var(--strong-rule) solid var(--gol-connection);align-self:center}.wc-resultado output{font:500 clamp(var(--head-size),5vw,var(--title-size))/var(--display-leading) var(--gol-mono);color:var(--gol-caution);font-variant-numeric:tabular-nums}.wc-resultado p{line-height:var(--headline-leading);margin:var(--gol-s2) 0 0;max-width:48ch}
+.wc-derecho{padding:var(--gol-s2) var(--gutter) var(--gol-s4);margin:0;color:var(--gol-sand);line-height:var(--flow-leading);max-width:none}
+.wc-campo{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:start;padding-block:var(--gol-s5) var(--gol-s7);border-top:var(--rule) solid var(--gol-slate)}
+.wc-campo h3{font-size:var(--heading-small);max-width:26ch}.wc-campo details p{margin-block:var(--gol-s3) 0}.wc-campo details p:empty{display:none}
+@media(max-width:740px){.wc-intro,.wc-panel,.wc-leyenda,.wc-campo{grid-template-columns:minmax(0,1fr);gap:var(--gol-s3)}.wc-intro{padding-block:var(--gol-s4)}.wc-intro h2{font-size:var(--heading-small)}.wc-mapa{height:min(49svh,calc(var(--gol-s8)*4));min-height:calc(var(--gol-s8)*3)}.wc-rotulo,.wc-zoom{top:var(--gol-s2);padding:var(--gol-s2)}.wc-rotulo{left:var(--gol-s2)}.wc-zoom{right:var(--gol-s2)}.wc-leyenda{gap:var(--gol-s1)}.wc-examen{text-align:left}.wc-panel{gap:var(--gol-s4)}.wc-resultado{padding-inline:var(--gol-s3) 0}.wc-grupos{gap:var(--gol-s3)}.wc-opts span{padding:var(--gol-s2) var(--gol-s3)}.wc-campo{padding-block:var(--gol-s4) var(--gol-s6)}}
+.wc-mapa{height:clamp(calc(var(--gol-s8)*3.5),55svh,calc(var(--gol-s8)*7))}
+.wc-mapa fieldset.wc-etapas{position:absolute;bottom:var(--gol-s3);left:50%;transform:translateX(-50%);width:max-content;max-width:100%;background:var(--gol-abyss);margin:0}
+.wc-mapa .wc-etapas legend{position:absolute;width:var(--rule);height:var(--rule);clip-path:inset(50%);overflow:hidden;white-space:nowrap}
+.wc-mapa .wc-etapas .wc-opts{flex-wrap:nowrap}.wc-clave i[data-color="neg"]{background:var(--gol-risk)}.wc-clave i[data-color="gain"]{background:var(--gol-sand)}
+@media(max-width:740px){.wc-mapa{height:clamp(calc(var(--gol-s8)*3.4),48svh,calc(var(--gol-s8)*5))}.wc-mapa fieldset.wc-etapas{bottom:var(--gol-s2)}.wc-mapa .wc-etapas .wc-opts span{padding-inline:var(--gol-s2)}}
+@media(max-width:359px){.wc-mapa fieldset.wc-etapas{top:var(--gol-s6);bottom:auto;left:var(--gol-s2);transform:none}}

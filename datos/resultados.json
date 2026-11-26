@@ -1,0 +1,112 @@
+{
+  "unidad": "El Espinal, Tolima",
+  "fecha": "2024-01-23",
+  "perfil": "especialista hipotético, sin penalización vial",
+  "circuitos": [
+    {
+      "terminales": "62–69",
+      "retiro": 65,
+      "antes": 726.8538083108295,
+      "despues": 786.8183858449548,
+      "porcentaje": 8.249881454632524
+    },
+    {
+      "terminales": "62–69",
+      "retiro": 82,
+      "antes": 726.8538083108295,
+      "despues": 726.9440200121335,
+      "porcentaje": 0.012411257982347657
+    },
+    {
+      "terminales": "83–89",
+      "retiro": 65,
+      "antes": 766.2725782355501,
+      "despues": 766.4925447579759,
+      "porcentaje": 0.028706041253934167
+    },
+    {
+      "terminales": "83–89",
+      "retiro": 82,
+      "antes": 766.2725782355501,
+      "despues": 843.5888475868925,
+      "porcentaje": 10.089917288880933
+    }
+  ],
+  "bosque": {
+    "original": {
+      "82": 18.491111189114307,
+      "65": 4.994490164478279
+    },
+    "ampliado": {
+      "82": 4.121788669523909,
+      "65": 4.682240256020236
+    }
+  },
+  "omniscape": {
+    "n": 6252,
+    "top450": 626,
+    "top810": 626,
+    "both": 395,
+    "only450": 231,
+    "only810": 231,
+    "overlapFraction": 0.6309904153354633,
+    "mask": "Celdas con corriente acumulada, referencia uniforme y cociente finitos en ambos radios; referencia uniforme > 1e-10 en cada radio.",
+    "top": "Percentil 90 calculado por separado en la máscara común. Interpolación lineal (tipo 7); se incluyen todas las celdas de valor mayor o igual al umbral. Sin empates en los umbrales."
+  },
+  "fraccion_optica_valida": {
+    "ene": 0.9980361626618413,
+    "oct": 0.01938588000953864
+  },
+  "diseno": "Circuitos de cuatro vecinos y terminales fijos, corriente unitaria. Variación relativa de resistencia, 100 × (final − inicial) / inicial. Dos radios Omniscape, corriente acumulada dividida por la referencia uniforme.",
+  "el_banco": {
+    "media": 3.42,
+    "M1": 3.51,
+    "A": 4.65
+  },
+  "inesica": [
+    {
+      "fecha": "2025-03-10",
+      "hora_utc": "10:41",
+      "sensor": "radar",
+      "agua": 232,
+      "sin_clasificar": 0,
+      "total": 1509,
+      "inicio_observacion_utc": "10:42:01",
+      "nota_hora_utc": "El valor 10:41 del archivo anterior corresponde al identificador del producto."
+    },
+    {
+      "fecha": "2025-03-10",
+      "hora_utc": "23:07",
+      "sensor": "radar",
+      "agua": 233,
+      "sin_clasificar": 0,
+      "total": 1509,
+      "alcance": "Pasada adicional archivada del 10 de marzo. El recorrido compara las dos adquisiciones matutinas."
+    },
+    {
+      "fecha": "2025-03-12",
+      "hora_utc": null,
+      "sensor": "landsat",
+      "agua": 0,
+      "sin_clasificar": 1189,
+      "total": 1509
+    },
+    {
+      "fecha": "2025-03-22",
+      "hora_utc": "10:41",
+      "sensor": "radar",
+      "agua": 280,
+      "sin_clasificar": 0,
+      "total": 1509,
+      "inicio_observacion_utc": "10:42:01",
+      "nota_hora_utc": "El valor 10:41 del archivo anterior corresponde al identificador del producto."
+    }
+  ],
+  "referencias": {
+    "bosque": "https://colombia.mapbiomas.org/descargas/mapas-de-las-colecciones/",
+    "radar": "https://www.jpl.nasa.gov/go/opera/products/dswx-product-suite/",
+    "hidrologia": "https://www.datos.gov.co/d/9fxi-fthb",
+    "cano": "banco/datos/cano-catalogo.json",
+    "contraste_municipal": "banco/datos/municipio.json"
+  }
+}
